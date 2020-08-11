@@ -1,0 +1,113 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        applicationId "com.anyvision.facekeyexample"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 6
+        versionName "1.5"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions"default"
+    productFlavors {
+//        poc {
+//            dimension"default"
+//            applicationIdSuffix ".poc"
+//            resValue "string", "app_name", "Sicredi Sesame"
+//        }
+        client {
+            dimension"default"
+            applicationIdSuffix ".client"
+            resValue "string", "app_name", "Facekey Client"
+        }
+        sicredi {
+            dimension"default"
+            applicationIdSuffix ".sicredi"
+            resValue "string", "app_name", "Facekey Sicredi"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def project = "fk"
+            def SEP = "_"
+/*            if(variant.productFlavors[0].name) {
+                def flavor = variant.productFlavors[0].name
+                fk_app_001_ra
+            }*/
+            def buildType = variant.variantData.variantConfiguration.buildType.name
+            def version = variant.versionName
+            def versionForm = "ra"
+            def date = new Date()
+            def formattedDate = date.format('ddMMyy_HHmm')
+
+            def newApkName = project + SEP + version + SEP + versionForm + SEP + formattedDate + ".apk"
+            outputFileName = new File(newApkName)
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:appcompat-v7:26.1.0'
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation "com.android.support:support-compat:28.0.0"
+    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.squareup:otto:1.3.8'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.pixplicity.easyprefs:library:1.9.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'dev.dworks.libs:volleyplus:0.1.4'
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+    implementation 'com.xw.repo:bubbleseekbar:3.10-lite'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.1'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-config:19.2.0'
+    implementation 'androidx.work:work-runtime:2.2.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.+'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+
+    implementation(name:'sesame-4.0.2', ext:'aar')
+    implementation(name:'api-5.1.1895', ext:'aar')
+    implementation(name:'cameraview-2.4.0', ext:'aar')
+    implementation(name:'common-5.1.140', ext:'aar')
+    implementation(name:'core-5.1.2298', ext:'aar')
+    implementation(name:'lottie-3.0.0', ext:'aar')
+    implementation(name:'ocr-4.0.0', ext:'aar')
+    implementation 'com.google.android.gms:play-services-vision:20.1.0'
+    implementation 'com.google.android.gms:play-services-vision-common:19.1.0'
+    implementation 'com.google.android.gms:play-services-vision-image-label:18.0.4'
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
+
+}
+apply plugin: 'com.google.gms.google-services'

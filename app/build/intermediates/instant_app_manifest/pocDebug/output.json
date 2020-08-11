@@ -1,0 +1,1 @@
+[{"outputType":{"type":"INSTANT_APP_MANIFEST"},"apkData":{"type":"MAIN","splits":[],"versionCode":6,"versionName":"1.5","enabled":true,"outputFile":"fk_1.5_ra_110820_1445.apk","fullName":"pocDebug","baseName":"poc-debug"},"path":"AndroidManifest.xml","properties":{"packageId":"com.anyvision.facekeyexample.poc","split":"","minSdkVersion":"21"}}]

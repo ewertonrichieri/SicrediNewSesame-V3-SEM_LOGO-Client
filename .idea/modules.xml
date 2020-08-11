@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO.iml" filepath="$PROJECT_DIR$/.idea/modules/NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO.iml" group="NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-5.1.1895/api-5.1.1895.iml" filepath="$PROJECT_DIR$/.idea/modules/api-5.1.1895/api-5.1.1895.iml" group="NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO/api-5.1.1895" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cameraview-2.4.0/cameraview-2.4.0.iml" filepath="$PROJECT_DIR$/.idea/modules/cameraview-2.4.0/cameraview-2.4.0.iml" group="NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO/cameraview-2.4.0" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-5.1.140/common-5.1.140.iml" filepath="$PROJECT_DIR$/.idea/modules/common-5.1.140/common-5.1.140.iml" group="NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO/common-5.1.140" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-5.1.2298/core-5.1.2298.iml" filepath="$PROJECT_DIR$/.idea/modules/core-5.1.2298/core-5.1.2298.iml" group="NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO/core-5.1.2298" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lottie-3.0.0/lottie-3.0.0.iml" filepath="$PROJECT_DIR$/.idea/modules/lottie-3.0.0/lottie-3.0.0.iml" group="NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO/lottie-3.0.0" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/play-services-basement-17.0.0/play-services-basement-17.0.0.iml" filepath="$PROJECT_DIR$/.idea/modules/play-services-basement-17.0.0/play-services-basement-17.0.0.iml" group="NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO/play-services-basement-17.0.0" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/play-services-tasks-17.0.0/play-services-tasks-17.0.0.iml" filepath="$PROJECT_DIR$/.idea/modules/play-services-tasks-17.0.0/play-services-tasks-17.0.0.iml" group="NEW-SESAME-ATUALIZACAO-CLIENT-SEM-LOGO/play-services-tasks-17.0.0" />
+    </modules>
+  </component>
+</project>

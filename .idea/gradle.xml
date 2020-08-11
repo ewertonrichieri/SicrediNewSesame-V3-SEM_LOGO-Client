@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api-5.1.1895" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/cameraview-2.4.0" />
+            <option value="$PROJECT_DIR$/common-5.1.140" />
+            <option value="$PROJECT_DIR$/core-5.1.2298" />
+            <option value="$PROJECT_DIR$/lottie-3.0.0" />
+            <option value="$PROJECT_DIR$/play-services-basement-17.0.0" />
+            <option value="$PROJECT_DIR$/play-services-tasks-17.0.0" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

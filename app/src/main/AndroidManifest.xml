@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.anyvision.facekeyexample">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+
+
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="false" />
+
+    <uses-permission
+        android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+
+
+    <application
+        android:name=".FacekeyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:theme">
+        <activity
+            android:name=".activities.logged.SolicitationHistoryApproved"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".activities.logged.SolicitationHistoryReproved"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activities.logged.SolicitationExtensionActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activities.RegisterActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activities.logged.TimeActivity" />
+
+        <activity android:name=".activities.logged.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activities.logged.ChamadoActivity"
+            android:screenOrientation="portrait"/>
+
+
+        <activity
+            android:name=".activities.CameraActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:screenOrientation="portrait" />
+
+
+        <receiver
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.google.android.gcm.demo.app" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".GcmIntentService" />
+
+        <activity
+            android:name=".activities.ResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.InstructionsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.LoginResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.LoginCameraActivity"
+            android:screenOrientation="portrait" /> <!-- para trabalhar com notificação em segundo plano -->
+
+        <service android:name=".firebase.Notification"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> <!-- para ter nivel de api 26 para cima -->
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" /> <!-- quando esta em segundo plano vai aparecer este icone -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo_fk_2015" />
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <!-- quando esta em segundo plano com esta cor do texto -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="face" />
+        <!-- To use multiple models: android:value="face,model2,model3" -->
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+
+</manifest>

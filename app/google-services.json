@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "1071532943381",
+    "firebase_url": "https://fortknoxfacekey.firebaseio.com",
+    "project_id": "fortknoxfacekey",
+    "storage_bucket": "fortknoxfacekey.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071532943381:android:d3e56a8cbb6b514186461c",
+        "android_client_info": {
+          "package_name": "com.anyvision.facekeyexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa1hl1tcnyQx5dq9ImD5b7D21309rGevc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071532943381:android:9caa6461904f4ac086461c",
+        "android_client_info": {
+          "package_name": "com.anyvision.facekeyexample.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa1hl1tcnyQx5dq9ImD5b7D21309rGevc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071532943381:android:97415b3df6b5465986461c",
+        "android_client_info": {
+          "package_name": "com.anyvision.facekeyexample.poc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa1hl1tcnyQx5dq9ImD5b7D21309rGevc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

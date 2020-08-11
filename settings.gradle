@@ -1,0 +1,8 @@
+include ':play-services-tasks-17.0.0'
+include ':play-services-basement-17.0.0'
+include ':lottie-3.0.0'
+include ':core-5.1.2298'
+include ':common-5.1.140'
+include ':cameraview-2.4.0'
+include ':api-5.1.1895'
+include ':app'

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="1dp"
+    android:paddingBottom="1dp"
+    android:id="@+id/recylerItem"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewRecycler_Main"
+            android:layout_gravity="center_horizontal"
+            android:padding="0dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:background="#65C734"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"/>
+
+<!--        <?xml version="1.0" encoding="utf-8"?>-->
+<!--        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingTop="10dp"-->
+<!--            android:paddingBottom="10dp"-->
+<!--            android:id="@+id/recylerItem"-->
+<!--            >-->
+
+<!--            <FrameLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textViewRecycler_Main"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:padding="5dp"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="#fff"-->
+<!--        android:background="#65C734"-->
+<!--        android:layout_width="260dp"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:gravity="center"/>-->
+
+    </FrameLayout>
+
+</LinearLayout>

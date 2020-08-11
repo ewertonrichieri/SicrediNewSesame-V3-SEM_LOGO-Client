@@ -8,37 +8,36 @@
 
     <ImageView
         android:id="@+id/sicredi"
-        android:layout_width="463dp"
-        android:layout_height="177dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sicredi_1" />
+        app:srcCompat="@drawable/logo_fk_2015" />
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:ems="10"
         android:hint="Usuário"
+        android:layout_marginBottom="20dp"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sicredi" />
+        app:layout_constraintBottom_toTopOf="@id/etName" />
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Nome"
         android:inputType="textPersonName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername" />
@@ -65,37 +64,28 @@
         android:id="@+id/btNext"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
         android:background="#65C734"
         android:text="Próximo"
         android:textColor="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintTop_toTopOf="@+id/spAgencia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnPrevious"/>
 
     <Button
         android:id="@+id/btnPrevious"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
         android:background="#65C734"
         android:text="Voltar"
         android:textColor="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="250dp"
-        android:layout_height="122dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="@+id/spAgencia"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/logo_fk_2015" />
+        app:layout_constraintEnd_toStartOf="@+id/btNext"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

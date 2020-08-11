@@ -23,7 +23,8 @@ public class ChamadoActivity extends AppCompatActivity {
     private Button btnCFTV;
     private Button btbAlarmeChamado;
     private Button btnSistemaIncendio;
-    private Button btnHVAC;
+    private Button btnIluminacao;
+    private Button btnArCondicionado;
     private String typeAccount;
     private Authentication auth;
     private String chamadoDescription = "App.AGENCIA.POC.AGENCIA0001.6";
@@ -42,15 +43,12 @@ public class ChamadoActivity extends AppCompatActivity {
         editor.clear().commit();
         editor.putString("typeAccount", typeAccount);
         editor.apply();
-        //nameAgencia = GetVariables.getInstance().getNameAgencia();
 
         btnCFTV = findViewById(R.id.btnCFTV);
         btbAlarmeChamado = findViewById(R.id.btbAlarmeChamado);
         btnSistemaIncendio = findViewById(R.id.btnSistemaIncendio);
-        btnHVAC = findViewById(R.id.btnHVAC);
-
-//        if (nameAgencia == null)
-//            nameAgencia = "App.AGENCIA.POC.AGENCIA0001.6";
+        btnIluminacao = findViewById(R.id.btnHVAC);
+        btnArCondicionado = findViewById(R.id.btnArCondicionado);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         int size = sharedPreferences.getInt("chamadoDescriptions_size", MODE_PRIVATE);
@@ -60,54 +58,66 @@ public class ChamadoActivity extends AppCompatActivity {
             listaChamadoDescriptions.add(sharedPreferences.getString("chamado" + "_" + i, null));
         }
 
-            btnCFTV.setText(listaChamadoDescriptions.get(1));
-            btbAlarmeChamado.setText(listaChamadoDescriptions.get(2));
-            btnSistemaIncendio.setText(listaChamadoDescriptions.get(3));
-            btnHVAC.setText(listaChamadoDescriptions.get(4));
+        btnCFTV.setText(listaChamadoDescriptions.get(1));
+        btbAlarmeChamado.setText(listaChamadoDescriptions.get(2));
+        btnSistemaIncendio.setText(listaChamadoDescriptions.get(3));
+        btnIluminacao.setText(listaChamadoDescriptions.get(4));
+        btnArCondicionado.setText(listaChamadoDescriptions.get(5));
 
-            btnCFTV.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnCFTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
+                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                    new MessageTopic(null, null, null);
-                    auth.requestToken(chamadoDescription, "1");
-                }
-            });
+                new MessageTopic(null, null, null);
+                auth.requestToken(chamadoDescription, "1");
+            }
+        });
 
-            btbAlarmeChamado.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btbAlarmeChamado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
+                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                    new MessageTopic(null, null, null);
-                    auth.requestToken(chamadoDescription, "2");
-                }
-            });
+                new MessageTopic(null, null, null);
+                auth.requestToken(chamadoDescription, "2");
+            }
+        });
 
-            btnSistemaIncendio.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnSistemaIncendio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
+                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                    new MessageTopic(null, null, null);
-                    auth.requestToken(chamadoDescription, "3");
-                }
-            });
+                new MessageTopic(null, null, null);
+                auth.requestToken(chamadoDescription, "3");
+            }
+        });
 
-            btnHVAC.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        btnIluminacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
+                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                    new MessageTopic(null, null, null);
-                    auth.requestToken(chamadoDescription, "4");
-                }
-            });
+                new MessageTopic(null, null, null);
+                auth.requestToken(chamadoDescription, "4");
+            }
+        });
+
+        btnArCondicionado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
+
+                new MessageTopic(null, null, null);
+                auth.requestToken(chamadoDescription, "5");
+            }
+        });
     }
 
     public static void startActivity(Context from) {

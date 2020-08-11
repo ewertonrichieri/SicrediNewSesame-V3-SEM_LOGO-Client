@@ -9,23 +9,23 @@
 
     <ImageView
         android:id="@+id/sicredi"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sicredi_1" />
+        app:srcCompat="@drawable/logo_fk_2015" />
 
     <Button
         android:id="@+id/btnCFTV"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="90dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:textColor="#fff"
@@ -38,7 +38,7 @@
     <Button
         android:id="@+id/btbAlarmeChamado"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="90dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -53,7 +53,7 @@
     <Button
         android:id="@+id/btnSistemaIncendio"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="90dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -66,34 +66,34 @@
         app:layout_constraintTop_toBottomOf="@+id/btbAlarmeChamado" />
 
     <Button
-    android:id="@+id/btnHVAC"
-    android:layout_width="match_parent"
-    android:layout_height="98dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:background="#65C734"
-    android:textColor="#fff"
-    android:textSize="22dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/btnSistemaIncendio" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="240dp"
-        android:layout_height="80dp"
-        android:layout_gravity="bottom|center_horizontal"
+        android:id="@+id/btnHVAC"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/logo_fk_2015"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#65C734"
+        android:textColor="#fff"
+        android:textSize="22dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSistemaIncendio" />
+
+    <Button
+        android:id="@+id/btnArCondicionado"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#65C734"
+        android:textColor="#fff"
+        android:textSize="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHVAC" />
 
     <FrameLayout
         android:layout_width="match_parent"

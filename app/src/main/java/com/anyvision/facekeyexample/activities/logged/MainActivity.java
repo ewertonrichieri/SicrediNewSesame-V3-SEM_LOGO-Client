@@ -67,101 +67,101 @@ public class MainActivity extends AppCompatActivity {
         auth.requestToken(aprovaReprovaExtesao, chamadoDescriptionsButtons);
 
         if(nameAgencia == null)
-                nameAgencia = "App.AGENCIA.POC.AGENCIA0001";
+            nameAgencia = "App.AGENCIA.POC.AGENCIA0001";
 
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("REGIONAL");
-            FirebaseMessaging.getInstance().subscribeToTopic("AGENCIA");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("REGIONAL");
+        FirebaseMessaging.getInstance().subscribeToTopic("AGENCIA");
 
-            SharedPreferences prefDescriptions = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            int size = prefDescriptions.getInt("descriptions_size", MODE_PRIVATE);
-            ArrayList<String> listaDescriptions = new ArrayList<String>(size);
-            for (int i = 0; i < size; i++)
-                listaDescriptions.add(prefDescriptions.getString("descriptions" + "_" + i, null));
+        SharedPreferences prefDescriptions = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        int size = prefDescriptions.getInt("descriptions_size", MODE_PRIVATE);
+        ArrayList<String> listaDescriptions = new ArrayList<String>(size);
+        for (int i = 0; i < size; i++)
+            listaDescriptions.add(prefDescriptions.getString("descriptions" + "_" + i, null));
 
-            btnTimeExtend.setVisibility(View.VISIBLE);
-            btnTimeExtend.setText(listaDescriptions.get(1));
+        btnTimeExtend.setVisibility(View.VISIBLE);
+        btnTimeExtend.setText(listaDescriptions.get(1));
 
-            btnTimeExtend2.setVisibility(View.VISIBLE);
-            btnTimeExtend2.setText(listaDescriptions.get(2));
+        btnTimeExtend2.setVisibility(View.VISIBLE);
+        btnTimeExtend2.setText(listaDescriptions.get(2));
 
-            btnArmarAlarmes.setVisibility(View.VISIBLE);
-            btnArmarAlarmes.setText(listaDescriptions.get(0));
+        btnArmarAlarmes.setVisibility(View.VISIBLE);
+        btnArmarAlarmes.setText(listaDescriptions.get(0));
 
-            btnLigarDesligarLuzes.setVisibility(View.VISIBLE);
-            btnLigarDesligarLuzes.setText(listaDescriptions.get(3));
+        btnLigarDesligarLuzes.setVisibility(View.VISIBLE);
+        btnLigarDesligarLuzes.setText(listaDescriptions.get(3));
 
-            btnChamado.setVisibility(View.VISIBLE);
-            btnChamado.setText(listaDescriptions.get(5));
+        btnChamado.setVisibility(View.VISIBLE);
+        btnChamado.setText(listaDescriptions.get(5));
 
-            btnPanico.setVisibility(View.VISIBLE);
-            btnPanico.setText(listaDescriptions.get(4));
+        btnPanico.setVisibility(View.VISIBLE);
+        btnPanico.setText(listaDescriptions.get(4));
 
-            btnTimeExtend.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnTimeExtend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
+                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                    String title = "Solicitação de Extensão de Alarme";
-                    String menssage = "Extensão de 60 minutos pela Agência ";
-                    String topic = "REGIONAL";
+                String title = "Solicitação de Extensão de Alarme";
+                String menssage = "Extensão de 60 minutos pela Agência ";
+                String topic = "REGIONAL";
 
-                    new MessageTopic(topic, title, menssage);
+                new MessageTopic(topic, title, menssage);
 
-                    auth.requestToken(nameAgencia + ".2", "true");
-                }
-            });
+                auth.requestToken(nameAgencia + ".2", "true");
+            }
+        });
 
-            //Desarmar Alarme
-            btnTimeExtend2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
+        //Desarmar Alarme
+        btnTimeExtend2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                    new MessageTopic(null, null, null);
-                    auth.requestToken(nameAgencia + ".3", "true");
-                }
-            });
+                new MessageTopic(null, null, null);
+                auth.requestToken(nameAgencia + ".3", "true");
+            }
+        });
 
-            btnArmarAlarmes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnArmarAlarmes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    new MessageTopic(null, null, null);
-                    auth.requestToken(nameAgencia + ".1", "true");
-                }
-            });
+                new MessageTopic(null, null, null);
+                auth.requestToken(nameAgencia + ".1", "true");
+            }
+        });
 
-            btnLigarDesligarLuzes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnLigarDesligarLuzes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    new MessageTopic(null, null, null);
-                    auth.requestToken(nameAgencia + ".4", "true");
-                }
-            });
+                new MessageTopic(null, null, null);
+                auth.requestToken(nameAgencia + ".4", "true");
+            }
+        });
 
-            btnChamado.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnChamado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    ChamadoActivity.startActivity(MainActivity.this);
-                }
-            });
+                ChamadoActivity.startActivity(MainActivity.this);
+            }
+        });
 
-            btnPanico.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnPanico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    String title = "Pânico Ativado";
-                    String menssage = "Botão de Panico Acionado";
-                    String topic = "REGIONAL";
+                String title = "Pânico Ativado";
+                String menssage = "Botão de Panico Acionado";
+                String topic = "REGIONAL";
 
-                    new MessageTopic(topic, title, menssage);
+                new MessageTopic(topic, title, menssage);
 
-                    auth.requestToken(nameAgencia + ".5", "true");
-                }
-            });
+                auth.requestToken(nameAgencia + ".5", "true");
+            }
+        });
     }
 
     public void onBackPressed(){
@@ -172,8 +172,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onDestroy(){
         super.onDestroy();
+        Log.d("destruindo", "Main activity");
+
     }
-    
+
     public static void startActivity(Context from) {
         Intent intent = new Intent(from, MainActivity.class);
         from.startActivity(intent);

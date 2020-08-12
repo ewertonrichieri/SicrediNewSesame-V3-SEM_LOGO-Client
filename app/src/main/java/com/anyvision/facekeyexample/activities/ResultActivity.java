@@ -41,10 +41,11 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
     public static final int SERVER_TIMEOUT = 60000;
     public static final int ENTER_ANIMATION_DURATION = 200;
     private File video;
-    private String serverUrl;
+    private static String serverUrl;
     private FragmentManager fragmentManager;
     private Slide enterAnimation;
     private AnvSurfaceType anvSurfaceType;
+    private TextView anyvisionUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,11 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
         backMenu = findViewById(R.id.menu);
         VIDEO_MP_4 = getString(R.string.sesameVideoMp4);
 
+        if(GetVariables.getInstance().getTextviewAnyvision().getText().toString() == null)
+        GetVariables.getInstance().setEtAnyvisionUrl(getString(R.string.server_anyvision));
+
+        serverUrl = GetVariables.getInstance().getEtAnyvisionUrl();
+
         fragmentManager = getSupportFragmentManager();
         enterAnimation = new Slide(Gravity.BOTTOM);
         enterAnimation.setDuration(ENTER_ANIMATION_DURATION);
@@ -67,9 +73,11 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
         Log.d("infoIdMac", InfoMobile.getMacAddress());
         AppData.setVideo(video);
 
-        serverUrl = "http://emea-sesame.anyvision.co:3003";
-        anvSurfaceType = AnvSurfaceType.DarkSurface;
+        if (GetVariables.getInstance().getEtAnyvisionUrl() == null) {
+            GetVariables.getInstance().setEtAnyvisionUrl(anyvisionUrl.getText().toString());
+        }
 
+        anvSurfaceType = AnvSurfaceType.DarkSurface;
         View tryAgain = findViewById(R.id.try_again);
 
         tryAgain.setOnClickListener(new View.OnClickListener() {
@@ -113,8 +121,6 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
     }
 
     private void startLivenessResults(File imageFile, File videoFile, String userId) {
-
-        serverUrl = "http://emea-sesame.anyvision.co:3003";
 
         Sesame.initialize(serverUrl, SERVER_TIMEOUT);
         registerToSesame(imageFile, videoFile, userId);

@@ -2,28 +2,20 @@ package com.anyvision.facekeyexample.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.SwitchCompat;
-
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.anyvision.facekeyexample.R;
 import com.anyvision.facekeyexample.models.AppData;
 import com.anyvision.facekeyexample.models.GetVariables;
 import com.anyvision.facekeyexample.models.Settings;
 import com.xw.repo.BubbleSeekBar;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class SettingsActivity extends BaseActivity {
 

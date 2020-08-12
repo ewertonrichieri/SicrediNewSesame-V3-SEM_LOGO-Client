@@ -62,6 +62,7 @@
     <string name="falhaNaVerificacao">Falha na verificação! Por favor tente novamente</string>
     <string name="sesameVideoMp4">/SesameVideo.mp4</string>
     <string name="registrado">Registrado</string>
+    <string name="server_anyvision">http://latam-sesame.anyvision.co:3003</string>
 
     <!-- LoginActivity -->
     <string name="enableBtnRegister">enableBtnRegister</string>

@@ -67,7 +67,10 @@ public class LoginResultActivity extends BaseActivity implements FragmentCommuni
         video = new File(getExternalFilesDir(null) + VIDEO_MP_4);
         AppData.setVideo(video);
 
-        serverUrl = "http://emea-sesame.anyvision.co:3003";
+        if(GetVariables.getInstance().getTextviewAnyvision().getText().toString() == null)
+            GetVariables.getInstance().setEtAnyvisionUrl(getString(R.string.server_anyvision));
+
+        serverUrl = GetVariables.getInstance().getEtAnyvisionUrl();
         anvSurfaceType = AnvSurfaceType.DarkSurface;
 
         authenticate();
@@ -100,7 +103,6 @@ public class LoginResultActivity extends BaseActivity implements FragmentCommuni
             e.printStackTrace();
         }
 
-        serverUrl = "http://emea-sesame.anyvision.co:3003";
         authenticateWithSesame(video, userId);
     }
 

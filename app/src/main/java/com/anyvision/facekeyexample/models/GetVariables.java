@@ -16,9 +16,10 @@ public class GetVariables {
     private static String spTypeAccount;
     private static String nameAgencia;
     private Authentication auth;
+    private static String etRegisterName;
+    private static String etRegisterCargo;
+    private static String etRegisterLocalAgencia;
 
-
-//mudei para private
     private GetVariables(){
         localServerUrl = "";
     }
@@ -61,6 +62,31 @@ public class GetVariables {
 
     public void setEtRegisterUsername(String etRegisterUsername) {
         GetVariables.etRegisterUsername = etRegisterUsername;
+    }
+
+    //teste
+    public void setNameRegister(String nameRegister){
+        GetVariables.etRegisterName = nameRegister;
+    }
+
+    public String getNameRegister(){
+        return etRegisterName;
+    }
+
+    public void setCargoRegister(String cargoRegister){
+        GetVariables.etRegisterCargo = cargoRegister;
+    }
+
+    public String getCargoRegister(){
+        return etRegisterCargo;
+    }
+
+    public void setLocalAgenciaRegister(String agenciaLocalRegister){
+        GetVariables.etRegisterLocalAgencia = agenciaLocalRegister;
+    }
+
+    public String getLocalRegister(){
+        return etRegisterLocalAgencia;
     }
 
     public String getSpTypeAccount() {

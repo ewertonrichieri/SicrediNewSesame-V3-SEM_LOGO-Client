@@ -12,6 +12,7 @@ import android.widget.Button;
 import androidx.fragment.app.FragmentManager;
 import com.anyvision.facekeyexample.R;
 import com.anyvision.facekeyexample.models.AppData;
+import com.anyvision.facekeyexample.models.GetVariables;
 import com.anyvision.sesame.Sesame;
 import com.anyvision.sesame.fragments.LivenessFragment;
 import com.anyvision.sesame.listeners.FragmentCommunicatior;
@@ -46,7 +47,11 @@ public class LoginCameraActivity extends BaseActivity implements FragmentCommuni
             enterAnimation.setDuration(ENTER_ANIMATION_DURATION);
             video = new File(getExternalFilesDir(null) + VIDEO_MP_4);
             AppData.setVideo(video);
-            serverUrl = "http://emea-sesame.anyvision.co:3003";
+
+            serverUrl = GetVariables.getInstance().getEtAnyvisionUrl();
+            if (serverUrl == null)
+                serverUrl = getString(R.string.servidorSesame);
+
             anvSurfaceType = AnvSurfaceType.DarkSurface;
             btnBack = findViewById(R.id.livenessBackBtn);
             imageFile = AppData.getIdImg();
@@ -72,23 +77,15 @@ public class LoginCameraActivity extends BaseActivity implements FragmentCommuni
     }
 
     private void clearBackStack() {
-
-        Log.d("fragmentEscolha", "getBackStackEntryCount = " + String.valueOf(fragmentManager.getBackStackEntryCount()));
         if (fragmentManager.getBackStackEntryCount() > 0) {
             FragmentManager.BackStackEntry entry = fragmentManager.getBackStackEntryAt(0);
-
-            Log.d("fragmentEscolha", "entry = " + String.valueOf(entry));
             fragmentManager.popBackStack(entry.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            Log.d("fragmentEscolha", "getId = " + String.valueOf(entry.getId()));
         }
     }
 
     @Override
     public void switchFragments(eFragmentChooser fragmentChooser) {
-//        if (fragmentChooser == eFragmentChooser.clearBackStack) {
-        Log.d("fragmentEscolha", "switchFragments = " + fragmentChooser.toString());
         clearBackStack();
-        //}
     }
 
     private void startLiveness() {

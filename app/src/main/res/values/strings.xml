@@ -56,13 +56,17 @@
     <string name="default_notification_channel_name">Notificação</string>
     <string name="fcm_token">FCM Token: %s</string>
     <string name="sesame_url">Anyvision URL</string>
+    <string name="APROVADO">APROVADOS</string>
+    <string name="REPROVADO">REPROVADOS</string>
 
     <!-- ResultActivity -->
+    <string name="usuarioJaCadastrado">Já existe um usuário cadastrado com este nome!</string>
     <string name="faceNaoIdentificadaNoDocumento">Não foi identificado sua face no documento! Por favor tente novamente</string>
     <string name="falhaNaVerificacao">Falha na verificação! Por favor tente novamente</string>
     <string name="sesameVideoMp4">/SesameVideo.mp4</string>
     <string name="registrado">Registrado</string>
-    <string name="server_anyvision">http://latam-sesame.anyvision.co:3003</string>
+<!--    <string name="server_anyvision">http://latam-sesame.anyvision.co:3003</string>-->
+    <string name="server_anyvision">http://200.188.213.130:3003</string>
 
     <!-- LoginActivity -->
     <string name="enableBtnRegister">enableBtnRegister</string>
@@ -73,5 +77,9 @@
     <string name="aprovaReprovaExtesao">aprovaReprovaExtesao</string>
     <string name="geral">geral</string>
     <string name="verifique_status_servidor">Por favor, verifique o status do servidor local!</string>
+
+    <!-- Servidor -->
+    <string name="servidorSesame">http://200.188.213.130:3003</string>
+    <string name="password">#FKtec202000#</string>
 
 </resources>

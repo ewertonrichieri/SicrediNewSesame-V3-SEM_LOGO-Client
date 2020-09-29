@@ -7,11 +7,11 @@ public class Enum {
         REGIONAL
     }
 
-    public enum requestNames {
-        aprovaReprovaExtesao,
+    public enum request {
+        state,
         descriptions,
-        state
-
+        aprovaReprovaExtesao,
+        chamadoDescriptionsButtons,
     }
 
     public enum variableState {
@@ -19,4 +19,9 @@ public class Enum {
         REPROVADO
     }
 
+    public enum SharedPrivate {
+        TIPO_AGENCIA_REGIONAL,
+        URL_ANYVISION,
+        URL_SERVIDOR_LOCAL
+    }
 }

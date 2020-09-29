@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,8 +29,8 @@ import java.util.ArrayList;
 public class SolicitationHistoryApproved extends AppCompatActivity {
 
     private RecyclerView.Adapter adapter;
-    private Button btnVoltar;
-    private Button btnHome;
+    private ImageButton btnVoltar;
+    private ImageButton btnHistBackSolicit_Reproved;
     private Authentication auth;
     private ArrayList<String> listSolicitHistory;
     private ProgressBar progressBar;
@@ -37,15 +38,19 @@ public class SolicitationHistoryApproved extends AppCompatActivity {
     private static Thread solicitationHistThread = null;
     private static Activity finishSolicitationHistoryApproved;
     private static boolean active = false;
+    private TextView txtMenuAprovReprov;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitation_history);
         btnVoltar = findViewById(R.id.btnHistBackSolicit);
-        btnHome = findViewById(R.id.btnHistBackHomeLogin);
         progressBar = findViewById(R.id.progressBarHistory);
         progressBar.setVisibility(View.GONE);
+        txtMenuAprovReprov = findViewById(R.id.txtMenuAprovReprov);
+        txtMenuAprovReprov.setText(getString(R.string.APROVADO));
+        btnHistBackSolicit_Reproved = findViewById(R.id.btnHistBackSolicit_Reproved);
+        btnHistBackSolicit_Reproved.setVisibility(View.GONE);
         AllowGetlistSolicitHist = true;
         finishSolicitationHistoryApproved = this;
 
@@ -67,8 +72,6 @@ public class SolicitationHistoryApproved extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
         }
 
-//        auth.requestToken("aprovaReprovaExtesao", "solicitationExtension");
-
         adapter = new SolicitHistAprovAdapter(listSolicitHistory, SolicitationHistoryApproved.this);
         recyclerView.setAdapter(adapter);
 
@@ -79,7 +82,6 @@ public class SolicitationHistoryApproved extends AppCompatActivity {
                 try {
                     while (!isInterrupted()) {
                         Thread.sleep(2000);
-                        Log.d("solicitationThread", "HistoryAPROVADO_looping_Thread");
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -143,25 +145,6 @@ public class SolicitationHistoryApproved extends AppCompatActivity {
                 //SolicitationExtensionActivity.refreshActivity();
                 SolicitationExtensionActivity.startActivity(SolicitationHistoryApproved.this);
                 solicitationHistThread.interrupt();
-            }
-        });
-
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (SolicitationExtensionActivity.onActive()){
-                    SolicitationExtensionActivity.getInstance().finish();
-                }
-
-                if (SolicitationHistoryReproved.onActive())
-                    SolicitationHistoryReproved.getInstance().finish();
-
-                LoginActivity.startActivity(SolicitationHistoryApproved.this);
-                GetVariables.getInstance().setSpTypeAccount("REGIONAL");
-                eraserSharedPreferences();
-
-                finish();
             }
         });
     }

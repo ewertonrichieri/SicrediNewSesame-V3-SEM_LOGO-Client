@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 7
-        versionName "1.5"
+        versionName "1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,11 +25,11 @@ android {
             applicationIdSuffix ".client"
             resValue "string", "app_name", "Facekey Client"
         }
-        sicredi {
-            dimension"default"
-            applicationIdSuffix ".sicredi"
-            resValue "string", "app_name", "Facekey Sicredi"
-        }
+//        sicredi {
+//            dimension"default"
+//            applicationIdSuffix ".sicredi"
+//            resValue "string", "app_name", "Facekey Sicredi"
+//        }
     }
 
     buildTypes {

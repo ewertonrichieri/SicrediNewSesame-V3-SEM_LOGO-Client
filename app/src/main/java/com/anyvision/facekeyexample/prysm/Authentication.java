@@ -69,7 +69,6 @@ public class Authentication extends Application {
 
     public void requestToken(final String name, final String newValue) {
 
-        Log.d("name ", name + "" + newValue);
         final String AccountType = GetVariables.getInstance().getSpTypeAccount();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(serverLocalUrl)
@@ -86,14 +85,8 @@ public class Authentication extends Application {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 try {
-
                     token = cleanOUTPUT(response.body().string());
-                    Log.d("auth", "SessionID: " + token);
                     hashpassword = md5(token + md5(AccountType + AccountType));
-
-                    Log.d("usuarioHash", serverLocalUrl);
-                    Log.d("usuarioHash", hashpassword);
-
                     if (response.isSuccessful()) {
 
                         if (getContext() == null) {
@@ -467,7 +460,6 @@ public class Authentication extends Application {
     //GetGeral so na primeira vez
     public void GetVariableSolicitationExtensionGeral(final String SessionID) {
 
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(serverLocalUrl)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
@@ -483,10 +475,7 @@ public class Authentication extends Application {
 
                 if (response.isSuccessful()) {
                     SolicitationExtension solicitation = response.body();
-                    Log.d("array3", "OK solicitação extensao 1 ");
-
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.clear().commit();
 

@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,8 +29,6 @@ import com.anyvision.facekeyexample.R;
 import com.anyvision.facekeyexample.activities.LoginActivity;
 import com.anyvision.facekeyexample.models.GetVariables;
 import com.anyvision.facekeyexample.models.MessageTopic;
-import com.anyvision.facekeyexample.models.Settings;
-import com.anyvision.facekeyexample.models.SolicitationExtension;
 import com.anyvision.facekeyexample.prysm.Authentication;
 import com.anyvision.facekeyexample.utils.Enum;
 import com.anyvision.facekeyexample.utils.NewAdapter;
@@ -49,17 +46,14 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private static boolean enableProgressBarVisible = true;
     private Paint p = new Paint();
-    private static boolean enableMessageError;
     private int LEFT = 4;
     private int RIGHT = 8;
     private int aprovado = 1;
     private int reprovado = 2;
     private Button btnAprovado;
     private Button btnReprovado;
-    private Button btnHome;
     private TextView serverLocalUrl;
     private TextView txtSolicitation;
-    private static String newToken;
     private static boolean key = true;
     private static Thread solicitationThread = null;
     private static ProgressBar progressBar;
@@ -75,7 +69,6 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
 
         btnAprovado = findViewById(R.id.btnAprovado);
         btnReprovado = findViewById(R.id.btnReprovado);
-        btnHome = findViewById(R.id.homeLoginActivity);
         serverLocalUrl = findViewById(R.id.serverLocalUrl);
 
         progressBar = findViewById(R.id.progressBarSolicit);
@@ -96,34 +89,8 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (liHistApproved.size() == 0)
-                    auth.requestToken("aprovaReprovaExtesao", Enum.requestNames.state.toString());
-
+                    auth.requestToken("aprovaReprovaExtesao", Enum.request.state.toString());
                 SolicitationHistoryApproved.startActivity(SolicitationExtensionActivity.this);
-            }
-        });
-
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                LoginActivity.startActivity(SolicitationExtensionActivity.this);
-                GetVariables.getInstance().setSpTypeAccount("REGIONAL");
-                eraserSharedPreferences();
-
-                if (SolicitationHistoryApproved.onActive()) {
-                    SolicitationHistoryApproved.setOnActive(false);
-                    SolicitationHistoryApproved.getInstance().finish();
-                }
-
-                if (SolicitationHistoryReproved.onActive()) {
-                    SolicitationHistoryReproved.setOnActive(false);
-                    SolicitationHistoryReproved.getInstance().finish();
-                }
-
-                Log.d("finishActivity", "SolicitationHistoryApproved " + String.valueOf(SolicitationHistoryApproved.onActive()));
-                Log.d("finishActivity", "SolicitationHistoryReproved " + String.valueOf(SolicitationHistoryReproved.onActive()));
-
-                finish();
             }
         });
 
@@ -132,8 +99,7 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (liHistReproved.size() == 0)
-                    auth.requestToken("aprovaReprovaExtesao", Enum.requestNames.state.toString());
-
+                    auth.requestToken("aprovaReprovaExtesao", Enum.request.state.toString());
                 SolicitationHistoryReproved.startActivity(SolicitationExtensionActivity.this);
             }
         });
@@ -141,23 +107,16 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
         final RecyclerView recyclerView = findViewById(R.id.recyclerViewMain);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
         SharedPreferences prefDescriptions = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
         int size = prefDescriptions.getInt("solicitacao_size", MODE_PRIVATE);
         listaDescriptions = new ArrayList<String>(size);
         for (int i = 0; i < size; i++) {
-//            listaDescriptions.add(prefDescriptions.getString("solicitacao" + "_" + i, null));
-            listaDescriptions.add(prefDescriptions.getString("solicitacao" + "_" + i, null).replace("App.",""));
-
+            listaDescriptions.add(prefDescriptions.getString("solicitacao" + "_" + i, null).replace("App.", ""));
         }
 
         if ((listaDescriptions == null) || listaDescriptions.size() == 0) {
             progressBar.setVisibility(View.VISIBLE);
-            //auth.requestToken("aprovaReprovaExtesao", "solicitationExtension");
-            Log.d("verificarNulo", "listaDescriptions esta nullo");
         }
-
         adapter = new NewAdapter(listaDescriptions, SolicitationExtensionActivity.this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -172,7 +131,6 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
         }
 
         liHistApproved = liApproved;
-        Log.d("threadSolicitation", "lista aprovados LiHistory Principal " + liHistApproved);
 
         //list historyReproved
         SharedPreferences prefHistReproved = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -184,29 +142,20 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
         }
 
         liHistReproved = liReproveed;
-
         solicitationThread = new Thread() {
             @Override
             public void run() {
                 try {
-
                     while (!isInterrupted()) {
-                        Log.d("solicitationThread", "looping");
                         Thread.sleep(2000);
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
-                                if (enableMessageError)
-                                    Toast.makeText(SolicitationExtensionActivity.this, "Falha no servidor, por favor verifique a conexão", Toast.LENGTH_LONG).show();
 
                                 if (AllowGetlistSolicitation) {
                                     AllowGetlistSolicitation = false;
 
                                     final SharedPreferences prefDescriptions = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                                    SharedPreferences.Editor editor = prefDescriptions.edit();
-
                                     int size = prefDescriptions.getInt("solicitacao_size", MODE_PRIVATE);
                                     ArrayList<String> listaDescription = new ArrayList<String>(size);
                                     for (int i = 0; i < size; i++) {
@@ -217,31 +166,19 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
                                         listaDescription = listaDescriptions;
 
                                     if (listaDescription.size() > listaDescriptions.size()) {
-
                                         for (int i = 0; i < listaDescription.size(); i++) {
-
                                             if (!listaDescriptions.contains(listaDescription.get(i))) {
-
-                                                Log.d("array2 ", " " + listaDescription.get(i) + " nao contem " + listaDescription.get(i) + "na lista listaDescriptions 2 " + listaDescriptions.toString());
-//                                                listaDescriptions.add(listaDescription.get(i));
-                                                listaDescriptions.add(0, listaDescription.get(i));
+                                                listaDescriptions.add(0, listaDescription.get(i).replace("App.", ""));
                                                 adapter.notifyDataSetChanged();
                                                 if (listaDescriptions.size() == 0) {
                                                     setAllowGetlistSolicitation();
                                                 } else {
-                                                    //progressBar.setVisibility(View.GONE);
-                                                    Log.d("verificaNulo", "Desativou progress bar");
                                                 }
-
                                                 adapter.notifyItemInserted(0);
-
                                                 if (refresh) {
                                                     refresh = false;
-                                                    finish();
-                                                    startActivity(getIntent());
                                                 }
                                             }
-
                                             if (adapter.getItemCount() != listaDescriptions.size()) {
                                                 finish();
                                                 startActivity(getIntent());
@@ -249,32 +186,23 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
                                         }
                                         adapter.notifyDataSetChanged();
                                     }
-
                                     if (refresh) {
                                         refresh = false;
-                                        finish();
-                                        startActivity(getIntent());
                                     }
-
                                     if (!enableProgressBarVisible)
-                                        Log.d("enable", "escondeu progress bar");
                                     progressBar.setVisibility(View.GONE);
                                     enableProgressBarVisible = true;
-
                                     if (listaDescriptions.size() == 0)
                                         txtSolicitation.setVisibility(View.VISIBLE);
                                     else {
                                         txtSolicitation.setVisibility(View.GONE);
                                     }
-
-
                                 }
                                 if (listaDescriptions.size() == 0) {
                                     txtSolicitation.setVisibility(View.VISIBLE);
                                     progressBar.setVisibility(View.GONE);
                                 } else {
                                     txtSolicitation.setVisibility(View.GONE);
-
                                 }
                             }
                         });
@@ -285,7 +213,6 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
             }
         };
         solicitationThread.start();
-
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -394,11 +321,6 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
         refresh = true;
     }
 
-    //teste
-    public static void setMessageError() {
-//         enableMessageError = true;
-    }
-
     public void onBackPressed() {
         LoginActivity.startActivity(SolicitationExtensionActivity.this);
         GetVariables.getInstance().setSpTypeAccount("REGIONAL");
@@ -416,24 +338,20 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
         super.onResume();
         auth.requestToken("aprovaReprovaExtesao", "geral");
         active = true;
-        Log.d("solicitationThread", "onResume");
     }
 
     public void onPause() {
         super.onPause();
-        Log.d("solicitationThread", "onPause");
     }
 
     public void onStop() {
         super.onStop();
         solicitationThread.interrupt();
         Thread.interrupted();
-
-        Log.d("solicitationThread", "onStop");
     }
 
     public void onDestroy() {
-        Log.d("destruindo", "SolicitationExtension");
+        active = false;
         super.onDestroy();
     }
 
@@ -445,7 +363,6 @@ public class SolicitationExtensionActivity extends AppCompatActivity {
     public static Activity getInstance() {
         return finishSolicitationExtension;
     }
-
     public static boolean onActive() {
         return active;
     }

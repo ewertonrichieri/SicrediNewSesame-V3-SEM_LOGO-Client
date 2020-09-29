@@ -20,13 +20,15 @@
         android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="Usuário"
         android:layout_marginBottom="20dp"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/etName" />
+        app:layout_constraintBottom_toTopOf="@id/etName"
+        app:layout_constraintTop_toBottomOf="@id/sicredi"/>
 
     <EditText
         android:id="@+id/etName"
@@ -36,30 +38,36 @@
         android:ems="10"
         android:hint="Nome"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 
-    <Spinner
-        android:id="@+id/spCargo"
+    <TextView
+        android:id="@+id/center"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
-
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etName" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Spinner
+        android:id="@+id/spCargo"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
+        app:layout_constraintStart_toStartOf="@id/etName"
+        app:layout_constraintTop_toBottomOf="@id/center"
+        app:layout_constraintBottom_toTopOf="@id/spAgencia"/>
 
     <Spinner
         android:id="@+id/spAgencia"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="35dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spCargo" />
+        app:layout_constraintStart_toStartOf="@id/etName"
+        app:layout_constraintTop_toBottomOf="@+id/spCargo"
+        app:layout_constraintBottom_toTopOf="@id/btNext"/>
 
     <Button
         android:id="@+id/btNext"
@@ -69,7 +77,7 @@
         android:text="Próximo"
         android:textColor="#fff"
         android:layout_marginLeft="10dp"
-        app:layout_constraintTop_toTopOf="@+id/spAgencia"
+        app:layout_constraintTop_toBottomOf="@+id/spAgencia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnPrevious"/>
@@ -81,12 +89,9 @@
         android:background="#65C734"
         android:text="Voltar"
         android:textColor="#fff"
-        app:layout_constraintTop_toTopOf="@+id/spAgencia"
+        app:layout_constraintTop_toBottomOf="@+id/spAgencia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btNext"/>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

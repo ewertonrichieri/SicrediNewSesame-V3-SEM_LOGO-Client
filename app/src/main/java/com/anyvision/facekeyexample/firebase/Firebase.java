@@ -1,12 +1,9 @@
 package com.anyvision.facekeyexample.firebase;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.os.Build;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
-import com.anyvision.facekeyexample.FacekeyApplication;
+import androidx.annotation.RequiresApi;
 import com.anyvision.facekeyexample.activities.LoginActivity;
 import com.anyvision.facekeyexample.models.GetVariables;
 import com.anyvision.facekeyexample.models.InfoMobile;
@@ -16,18 +13,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import android.content.Context;
-
-import com.google.gson.JsonObject;
-
-
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class Firebase {
     private static DatabaseReference mDatabase;
     private static Firebase firebaseInstance;
-    private String token;
     private String mac;
-
+    private static StringsFirebase str;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(str.dataHoraAtual);
+    private static LocalDateTime localDateTime;
+    private static String dataHoraNaoRegistrado;
 
     public Firebase() {
         try {
@@ -43,43 +40,19 @@ public class Firebase {
         if (firebaseInstance == null) {
             firebaseInstance = new Firebase();
         }
-
         return firebaseInstance;
-
-    }
-
-    public void allowRegisterUser() {
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("Macs/" + mac + "/allowRegister");
-
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String post = String.valueOf(dataSnapshot.getValue());
-                Log.d("data", post);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("data", String.valueOf(databaseError.getCode()));
-            }
-        });
     }
 
     public static void getTypeFirebase() {
         try {
             String mac = InfoMobile.getMacAddress();
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference ref = database.getReference("Type/" + mac + "/tipo");
-
+            DatabaseReference ref = database.getReference(str.typeComBarra + mac + str.tipoComBara);
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String post = String.valueOf(dataSnapshot.getValue());
                     GetVariables.getInstance().setSpTypeAccount(post);
-                    Log.d("dataFirebase", post);
-
                 }
 
                 @Override
@@ -90,21 +63,21 @@ public class Firebase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    public static void unRegister(String mac, String registro) {
+    public static void unRegister(String mac, Boolean registro) {
         try {
             mDatabase = FirebaseDatabase.getInstance().getReference();
+            dataHoraNaoRegistrado = dataHoraAtual();
+            String modeloMobile = InfoMobile.getModeloMobile();
 
-            if (mac.contains(":")) {
-                mDatabase.child("UnRegister").child("%" + mac.replace(":", "")).setValue(registro);
+            if (registro) {
+                mDatabase.child(str.unRegister).child(str.caracterPorcentagem + mac).removeValue();
                 LoginActivity.stopThreadLogin();
             } else {
-                mDatabase.child("UnRegister").child("%" + mac).setValue(registro);
+                mDatabase.child(str.unRegister).child(str.caracterPorcentagem + mac).child(modeloMobile).setValue(dataHoraNaoRegistrado + " -> " + str.naoRegistrado);
             }
 
-            Log.d("FirebaseDeuCerto", "firebase un register ok");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,11 +85,16 @@ public class Firebase {
 
     public void registerType(String mac, String tipo) {
         try {
-            mDatabase.child("Type").child(mac)
-                    .child("tipo").setValue(tipo);
+            mDatabase.child(str.type).child(mac)
+                    .child(str.tipo).setValue(tipo);
         } catch (Exception e) {
-
         }
+    }
+
+    public static String dataHoraAtual(){
+        localDateTime = LocalDateTime.now();
+        dataHoraNaoRegistrado = formatter.format(localDateTime);
+        return dataHoraNaoRegistrado;
     }
 
     public void createUser(String username,
@@ -125,76 +103,83 @@ public class Firebase {
                            String agencia) {
 
         String mac = InfoMobile.getMacAddress();
-        String key = mac + "/" + username;
+        String key = mac + str.caracterBarra + username;
+        String dtRegistro = dataHoraAtual();
+        String modeloMobile = InfoMobile.getModeloMobile();
 
-        mDatabase.child("Users").child(key)
-                .child("username").setValue(username);
+        mDatabase.child(str.users).child(key)
+                .child(str.username).setValue(username);
 
-        mDatabase.child("Users").child(key)
-                .child("name").setValue(name);
+        mDatabase.child(str.users).child(key)
+                .child(str.name).setValue(name);
 
-        mDatabase.child("Users").child(key)
-                .child("macAddress").setValue(mac);
+        mDatabase.child(str.users).child(key)
+                .child(str.macAddress).setValue(mac);
 
-        mDatabase.child("Users").child(key)
-                .child("cargo").setValue(cargo);
+        mDatabase.child(str.users).child(key)
+                .child(str.cargo).setValue(cargo);
 
-        mDatabase.child("Users").child(key)
-                .child("agencia").setValue(agencia);
+        mDatabase.child(str.users).child(key)
+                .child(str.agencia).setValue(agencia);
 
-        if (cargo.equals("Gerente Agência")) {
-            mDatabase.child("Users").child(key)
-                    .child("tipo").setValue("AGENCIA");
+        mDatabase.child(str.users).child(key)
+                .child(str.dtRegistro).setValue(dtRegistro);
 
-            registerType(mac, "AGENCIA");
+        mDatabase.child(str.users).child(key)
+                .child(str.modelo).setValue(modeloMobile);
 
-            GetVariables.getInstance().setSpTypeAccount("AGENCIA");
-            GetVariables.getInstance().setNameAgencia("App.AGENCIA.POC.AGENCIA0001");
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("REGIONAL");
+        if (cargo.equals(str.gerenteAgencia)) {
+            mDatabase.child(str.users).child(key)
+                    .child(str.tipo).setValue(str.AGENCIA);
 
-        } else if (cargo.equals("Gerente Regional")) {
-            mDatabase.child("Users").child(key)
-                    .child("tipo").setValue("REGIONAL");
-            GetVariables.getInstance().setSpTypeAccount("REGIONAL");
-            GetVariables.getInstance().setNameAgencia("App.REGIONAL.POC.AGENCIA0001.Reprogramacao");
+            registerType(mac, str.AGENCIA);
 
-            registerType(mac, "REGIONAL");
+            GetVariables.getInstance().setSpTypeAccount(str.AGENCIA);
+            GetVariables.getInstance().setNameAgencia(str.App_AGENCIA_POC_AGENCIA0001);
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(str.REGIONAL);
 
-            FirebaseMessaging.getInstance().subscribeToTopic("REGIONAL");
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("AGENCIA");
+        } else if (cargo.equals(str.gerenteRegional)) {
+            mDatabase.child(str.users).child(key)
+                    .child(str.tipo).setValue(str.REGIONAL);
+            GetVariables.getInstance().setSpTypeAccount(str.REGIONAL);
+            GetVariables.getInstance().setNameAgencia(str.App_REGIONAL_POC_AGENCIA0001_Reprogramacao);
+
+            registerType(mac, str.REGIONAL);
+
+            FirebaseMessaging.getInstance().subscribeToTopic(str.REGIONAL);
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(str.AGENCIA);
         }
 
-        mDatabase.child("Macs").child(mac)
+        mDatabase.child(str.macs).child(mac)
                 .child(username).setValue("1");
-
-        //unRegister(mac, "Registrado");
     }
 
     public void sendNotification(boolean status, String username) {
-        try{
+        try {
             String mac = InfoMobile.getMacAddress();
-            String key = mac + "/" + username;
+            String key = mac + str.caracterBarra + username;
 
-            mDatabase.child("Notification").child(key)
-                    .child("username").setValue(username);
+            mDatabase.child(str.notification).child(key)
+                    .child(str.username).setValue(username);
 
-            mDatabase.child("Notification").child(key)
-                    .child("SolicitacaoExtensao").setValue(status);
-        }
-        catch (Exception e){
+            mDatabase.child(str.notification).child(key)
+                    .child(str.solicitacaoExtensao).setValue(status);
+
+            mDatabase.child(str.notification).child(key)
+                    .child(str.dataEnvioMessagem).setValue(dataHoraAtual());
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void sendTokenFirebaseToServer(String token) {
 
-        try{
+        try {
             Log.d("token", token);
-
-            mDatabase.child("Users").child(this.mac)
-                    .child("tokenNotification").setValue(token);
-        }
-        catch (Exception e){
+            mDatabase.child(str.users).child(this.mac)
+                    .child(str.tokenNotification).setValue(token);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -29,7 +29,8 @@ public class Settings {
         doDelete = true;
         environmentThreshold = 1f;
         artifactThreshold = 1f;
-        baseUrl = "http://emea-sesame.anyvision.co:3000";
+//        baseUrl = "http://emea-sesame.anyvision.co:3000";
+        baseUrl = "http://200.188.213.130:3003";
         localUrl = "http://192.168.5.233";
 
     }

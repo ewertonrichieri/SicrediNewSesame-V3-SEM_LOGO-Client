@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="146dp"
-            android:background="#008000"
+            android:background="#65C734"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
@@ -64,22 +64,6 @@
             android:layout_marginTop="150dp"
             android:background="#65C734"
             android:text="APROVADO"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/homeLoginActivity"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="137dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/homeLoginActivity"
-            android:layout_alignTop="@id/btnAprovado"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_marginBottom="35.7dp"
-            android:background="#65C734"
-            android:gravity="center"
-            android:text="HOME"
             android:textColor="#FFFFFF" />
 
         <Button
@@ -117,122 +101,3 @@
     </RelativeLayout>
 
 </LinearLayout>
-
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    android:weightSum="1.0"-->
-    <!--    tools:context=".activities.logged.SolicitationExtensionActivity">-->
-
-    <!--    <FrameLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent">-->
-
-    <!--        <ImageView-->
-    <!--            android:layout_width="180dp"-->
-    <!--            android:layout_height="120dp"-->
-    <!--            android:layout_gravity="top|center_horizontal"-->
-    <!--            android:layout_marginTop="30dp"-->
-    <!--            android:background="@drawable/sicredi_1" />-->
-
-    <!--        <androidx.recyclerview.widget.RecyclerView-->
-    <!--            android:id="@+id/recyclerViewMain"-->
-    <!--            android:layout_width="409dp"-->
-    <!--            android:layout_height="382dp"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:layout_marginTop="45dp"-->
-    <!--            android:background="#FFFFFF"-->
-    <!--            android:textAlignment="center"-->
-    <!--            tools:ignore="MissingConstraints" />-->
-
-    <!--        <FrameLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content">-->
-
-    <!--            <ProgressBar-->
-    <!--                android:id="@+id/progressBarSolicit"-->
-    <!--                style="?android:attr/progressBarStyle"-->
-    <!--                android:layout_width="100dp"-->
-    <!--                android:layout_height="100dp"-->
-
-    <!--                android:layout_marginLeft="140dp"-->
-    <!--                android:layout_marginTop="320dp" />-->
-
-    <!--            <androidx.appcompat.widget.Toolbar-->
-    <!--                android:id="@+id/toolbar"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_marginTop="146dp"-->
-    <!--                android:background="#008000"-->
-    <!--                android:minHeight="?attr/actionBarSize"-->
-    <!--                android:theme="?attr/actionBarTheme" />-->
-
-    <!--            <Button-->
-    <!--                android:id="@+id/btnAprovado"-->
-    <!--                style="?android:attr/borderlessButtonStyle"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_gravity="right"-->
-    <!--                android:layout_marginLeft="268dp"-->
-    <!--                android:layout_marginTop="150dp"-->
-    <!--                android:background="#65C734"-->
-    <!--                android:text="APROVADO"-->
-    <!--                android:textColor="#FFFFFF" />-->
-
-    <!--            <Button-->
-    <!--                android:id="@+id/homeLoginActivity"-->
-    <!--                style="?android:attr/borderlessButtonStyle"-->
-    <!--                android:layout_width="137dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_gravity="center_vertical"-->
-    <!--                android:layout_marginLeft="137dp"-->
-    <!--                android:layout_marginBottom="35.7dp"-->
-    <!--                android:background="#65C734"-->
-    <!--                android:text="HOME"-->
-    <!--                android:textColor="#FFFFFF" />-->
-
-    <!--            <Button-->
-    <!--                android:id="@+id/btnReprovado"-->
-    <!--                style="?android:attr/borderlessButtonStyle"-->
-    <!--                android:layout_width="137dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_gravity="left"-->
-    <!--                android:layout_marginTop="150dp"-->
-    <!--                android:background="#65C734"-->
-    <!--                android:text="REPROVADO"-->
-    <!--                android:textColor="#FFFFFF" />-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/txtSolicitation"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_gravity="center_horizontal"-->
-    <!--                android:layout_marginTop="370dp"-->
-    <!--                android:text="No momento você não tem novas solicitações" />-->
-    <!--        </FrameLayout>-->
-
-    <!--    </FrameLayout>-->
-
-    <!--    <FrameLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent">-->
-
-    <!--        <ImageView-->
-    <!--            android:layout_width="200dp"-->
-    <!--            android:layout_height="60dp"-->
-    <!--            android:layout_gravity="bottom|center_horizontal"-->
-    <!--            android:layout_marginBottom="40dp"-->
-    <!--            android:background="@drawable/logo_fk_2015" />-->
-    <!--    </FrameLayout>-->
-
-    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-    <!-- -->
-
-
-    <!--&lt;!&ndash; &ndash;&gt;-->

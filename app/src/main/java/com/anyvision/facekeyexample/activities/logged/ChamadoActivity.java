@@ -67,55 +67,70 @@ public class ChamadoActivity extends AppCompatActivity {
         btnCFTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
-
-                new MessageTopic(null, null, null);
-                auth.requestToken(chamadoDescription, "1");
+                    new MessageTopic(null, null, null);
+                    auth.requestToken(chamadoDescription, "1");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btbAlarmeChamado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
-
-                new MessageTopic(null, null, null);
-                auth.requestToken(chamadoDescription, "2");
+                    new MessageTopic(null, null, null);
+                    auth.requestToken(chamadoDescription, "2");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btnSistemaIncendio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
-
-                new MessageTopic(null, null, null);
-                auth.requestToken(chamadoDescription, "3");
+                    new MessageTopic(null, null, null);
+                    auth.requestToken(chamadoDescription, "3");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btnIluminacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
-
-                new MessageTopic(null, null, null);
-                auth.requestToken(chamadoDescription, "4");
+                    new MessageTopic(null, null, null);
+                    auth.requestToken(chamadoDescription, "4");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btnArCondicionado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
-
-                new MessageTopic(null, null, null);
-                auth.requestToken(chamadoDescription, "5");
+                    new MessageTopic(null, null, null);
+                    auth.requestToken(chamadoDescription, "5");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

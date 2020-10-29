@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:background="#FFFFFF"
     tools:context=".activities.logged.SolicitationExtensionActivity">
 
     <RelativeLayout
@@ -14,12 +15,12 @@
 
         <ImageView
             android:id="@+id/sicredi_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="110dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="top|center_horizontal"
             android:layout_marginTop="30dp"
-            android:background="@drawable/logo_fk_2015" />
+            android:background="@drawable/sicredi_1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewMain"
@@ -41,8 +42,8 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="140dp"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="140dp"
             android:layout_marginTop="320dp" />
 
         <androidx.appcompat.widget.Toolbar
@@ -63,8 +64,40 @@
             android:layout_gravity="right"
             android:layout_marginTop="150dp"
             android:background="#65C734"
-            android:text="APROVADO"
+            android:text="APROVADOS"
             android:textColor="#FFFFFF" />
+
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:id="@+id/txtHomeLoginActivity"-->
+        <!--            style="?android:attr/borderlessButtonStyle"-->
+        <!--            android:layout_alignTop="@id/btnAprovado"-->
+        <!--            android:layout_centerInParent="true"-->
+        <!--            android:layout_centerHorizontal="true"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginBottom="35.7dp"-->
+        <!--            android:background="#65C734"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="HOME"-->
+        <!--            android:textSize="18dp"-->
+        <!--            android:textColor="#FFFFFF" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/homeLoginActivity"-->
+        <!--            style="?android:attr/borderlessButtonStyle"-->
+        <!--            android:layout_width="137dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignLeft="@id/homeLoginActivity"-->
+        <!--            android:layout_alignTop="@id/btnAprovado"-->
+        <!--            android:layout_centerInParent="true"-->
+        <!--            android:layout_centerHorizontal="true"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginBottom="35.7dp"-->
+        <!--            android:background="#65C734"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="HOME"-->
+        <!--            android:textColor="#FFFFFF" />-->
 
         <Button
             android:id="@+id/btnReprovado"
@@ -75,8 +108,7 @@
             android:layout_gravity="left"
             android:layout_marginTop="150dp"
             android:background="#65C734"
-
-            android:text="REPROVADO"
+            android:text="REPROVADOS"
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -93,11 +125,120 @@
             android:id="@+id/sicredi_2"
             android:layout_width="200dp"
             android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="40dp"
-            />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/logo_fk_2015" />
     </RelativeLayout>
 
 </LinearLayout>
+
+
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:custom="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="horizontal"-->
+<!--    tools:context=".activities.logged.SolicitationExtensionActivity">-->
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/sicredi_1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_gravity="top|center_horizontal"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:background="@drawable/logo_fk_2015" />-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recyclerViewMain"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignTop="@id/toolbar"-->
+<!--            android:layout_alignBottom="@id/sicredi_2"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="60dp"-->
+<!--            android:layout_marginBottom="85dp"-->
+<!--            android:background="#FFFFFF"-->
+<!--            android:textAlignment="center"-->
+<!--            tools:ignore="MissingConstraints" />-->
+
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/progressBarSolicit"-->
+<!--            style="?android:attr/progressBarStyle"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginLeft="140dp"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_marginTop="320dp" />-->
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="146dp"-->
+<!--            android:background="#65C734"-->
+<!--            android:minHeight="?attr/actionBarSize"-->
+<!--            android:theme="?attr/actionBarTheme" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btnAprovado"-->
+<!--            style="?android:attr/borderlessButtonStyle"-->
+<!--            android:layout_width="137dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_gravity="right"-->
+<!--            android:layout_marginTop="150dp"-->
+<!--            android:background="#65C734"-->
+<!--            android:text="APROVADO"-->
+<!--            android:textColor="#FFFFFF" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btnReprovado"-->
+<!--            style="?android:attr/borderlessButtonStyle"-->
+<!--            android:layout_width="137dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_gravity="left"-->
+<!--            android:layout_marginTop="150dp"-->
+<!--            android:background="#65C734"-->
+
+<!--            android:text="REPROVADO"-->
+<!--            android:textColor="#FFFFFF" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/txtSolicitation"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginTop="370dp"-->
+<!--            android:text="No momento você não tem novas solicitações" />-->
+
+
+<!--        <ImageView-->
+<!--            android:id="@+id/sicredi_2"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_gravity="bottom|center_horizontal"-->
+<!--            android:layout_marginBottom="40dp"-->
+<!--            />-->
+<!--    </RelativeLayout>-->
+
+<!--</LinearLayout>-->

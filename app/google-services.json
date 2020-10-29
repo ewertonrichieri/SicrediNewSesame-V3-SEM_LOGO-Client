@@ -66,9 +66,154 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1071532943381:android:f788881a049f8daf86461c",
+        "android_client_info": {
+          "package_name": "com.anyvision.facekeyexample.clientSicrediAg0001"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa1hl1tcnyQx5dq9ImD5b7D21309rGevc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071532943381:android:fb9bdee1584b6d8486461c",
+        "android_client_info": {
+          "package_name": "com.anyvision.facekeyexample.fklight"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa1hl1tcnyQx5dq9ImD5b7D21309rGevc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071532943381:android:13e8d7afa7c0f75486461c",
+        "android_client_info": {
+          "package_name": "com.anyvision.facekeyexample.fkmockup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa1hl1tcnyQx5dq9ImD5b7D21309rGevc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071532943381:android:35742a969df1053a86461c",
+        "android_client_info": {
+          "package_name": "com.anyvision.facekeyexample.itau"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa1hl1tcnyQx5dq9ImD5b7D21309rGevc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1071532943381:android:97415b3df6b5465986461c",
         "android_client_info": {
           "package_name": "com.anyvision.facekeyexample.poc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa1hl1tcnyQx5dq9ImD5b7D21309rGevc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071532943381-5athots4qiofgm2j5m7k7jdjscg7r4ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071532943381:android:4834a87aae3bb18386461c",
+        "android_client_info": {
+          "package_name": "com.anyvision.facekeyexample.santander"
         }
       },
       "oauth_client": [

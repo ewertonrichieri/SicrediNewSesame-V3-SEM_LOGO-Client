@@ -183,7 +183,7 @@ public class Authentication extends Application {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.d("chamado", "acho q setou agora a variavel");
+                Log.d("chamado", response.toString());
 
                 showToast(response.code());
                 if (response.isSuccessful()) {

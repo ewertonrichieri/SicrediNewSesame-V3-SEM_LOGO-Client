@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         btnLigarDesligarLuzes = findViewById(R.id.btnLigarDesligar);
         btnChamado = findViewById(R.id.btnChamado);
         btnPanico = findViewById(R.id.btnPanico);
-        btnPorta = findViewById(R.id.btnPorta);
+        //btnPorta = findViewById(R.id.btnPorta);
 
         auth.requestToken(Enum.request.aprovaReprovaExtesao.toString(), Enum.request.chamadoDescriptionsButtons.toString());
 
@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         btnPanico.setVisibility(View.VISIBLE);
         btnPanico.setText(listaDescriptions.get(4));
 
-        btnPorta.setVisibility(View.VISIBLE);
-        btnPorta.setText(listaDescriptions.get(6));
+//        btnPorta.setVisibility(View.VISIBLE);
+//        btnPorta.setText(listaDescriptions.get(6));
 
         btnTimeExtend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,11 +172,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    String title = "Pânico Ativado";
-                    String menssage = "Botão de Panico Acionado";
-                    String topic = "REGIONAL";
+//                    String title = "Pânico Ativado";
+//                    String menssage = "Botão de Panico Acionado";
+//                    String topic = "REGIONAL";
 
-                    new MessageTopic(topic, title, menssage);
+                    new MessageTopic(null, null, null);
 
                     auth.requestToken(nameAgencia + ".5", "true");
                 } catch (Exception e) {
@@ -185,17 +185,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnPorta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    new MessageTopic(null, null, null);
-                    auth.requestToken(nameAgencia + ".7", "true");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        btnPorta.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                try {
+//                    new MessageTopic(null, null, null);
+//                    auth.requestToken(nameAgencia + ".7", "true");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     public void onBackPressed() {

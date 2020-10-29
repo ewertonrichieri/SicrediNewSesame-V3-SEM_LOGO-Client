@@ -7,147 +7,300 @@
     tools:context=".activities.logged.MainActivity">
 
     <ImageView
-        android:id="@+id/fkLogo"
-        android:layout_width="wrap_content"
+        android:id="@+id/sicredi"
+        android:layout_width="250dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.12"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.16"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_fk_2015" />
+        app:srcCompat="@drawable/sicredi_1" />
+
 
     <Button
         android:id="@+id/btnExtend"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.095"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
         android:background="#65C734"
         android:text="Pedido de Extensão de Horário"
         android:textColor="#fff"
         android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnExtend2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fkLogo"
-        app:layout_constraintBottom_toTopOf="@+id/btnExtend2"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/sicredi" />
 
     <Button
         android:id="@+id/btnExtend2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.095"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:text="Desligar Luzes"
         android:textColor="#fff"
         android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnArmar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnArmar"
         app:layout_constraintTop_toBottomOf="@+id/btnExtend" />
 
     <Button
         android:id="@+id/btnArmar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.095"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:text="Desarmar Alarmes"
         android:textColor="#fff"
         android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLigarDesligar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnLigarDesligar"
         app:layout_constraintTop_toBottomOf="@+id/btnExtend2" />
 
     <Button
         android:id="@+id/btnLigarDesligar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.095"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:text="Ligar Luzes"
         android:textColor="#fff"
         android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnChamado"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnChamado"
         app:layout_constraintTop_toBottomOf="@+id/btnArmar" />
 
     <Button
         android:id="@+id/btnChamado"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.095"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:text="Desligar Luzes"
         android:textColor="#fff"
         android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnPanico"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLigarDesligar"
-        app:layout_constraintBottom_toTopOf="@+id/btnPorta"
-    />
-
-    <Button
-        android:id="@+id/btnPorta"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.095"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
-        android:background="#65C734"
-        android:text="Porta"
-        android:textColor="#fff"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChamado"
-        app:layout_constraintBottom_toTopOf="@+id/btnPanico"/>
+        />
 
 
     <Button
         android:id="@+id/btnPanico"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.13"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="40dp"
         android:background="#ff0000"
         android:text="Pânico"
         android:textColor="#fff"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.13"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPorta"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/btnChamado" />
+    />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/logo_fk_2015"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".activities.logged.MainActivity">-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/fkLogo"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.12"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="45dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.493"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/logo_fk_2015" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnExtend"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.095"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="2dp"-->
+<!--        android:background="#65C734"-->
+<!--        android:text="Pedido de Extensão de Horário"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/fkLogo"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btnExtend2"-->
+<!--        />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnExtend2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.095"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginBottom="2dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:background="#65C734"-->
+<!--        android:text="Desligar Luzes"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btnArmar"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnExtend" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnArmar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.095"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginBottom="2dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:background="#65C734"-->
+<!--        android:text="Desarmar Alarmes"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btnLigarDesligar"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnExtend2" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnLigarDesligar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.095"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginBottom="2dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:background="#65C734"-->
+<!--        android:text="Ligar Luzes"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btnChamado"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnArmar" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnChamado"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.095"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginBottom="2dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:background="#65C734"-->
+<!--        android:text="Desligar Luzes"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnLigarDesligar"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btnPorta"-->
+<!--    />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnPorta"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.095"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="2dp"-->
+<!--        android:background="#65C734"-->
+<!--        android:text="Porta"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnChamado"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btnPanico"/>-->
+
+
+<!--    <Button-->
+<!--        android:id="@+id/btnPanico"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.13"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="40dp"-->
+<!--        android:background="#ff0000"-->
+<!--        android:text="Pânico"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnPorta"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

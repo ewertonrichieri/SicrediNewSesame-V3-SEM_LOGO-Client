@@ -8,40 +8,42 @@
 
     <ImageView
         android:id="@+id/sicredi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_width="463dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_fk_2015" />
+        app:srcCompat="@drawable/sicredi_1" />
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Usuário"
-        android:layout_marginBottom="20dp"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/etName"
-        app:layout_constraintTop_toBottomOf="@id/sicredi"/>
+        app:layout_constraintTop_toBottomOf="@+id/sicredi"
+        app:layout_constraintBottom_toTopOf="@id/etName"/>
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Nome"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@id/center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUsername" />
+        app:layout_constraintTop_toBottomOf="@id/etUsername"
+        app:layout_constraintBottom_toTopOf="@id/center"/>
 
     <TextView
         android:id="@+id/center"
@@ -57,14 +59,16 @@
         android:id="@+id/spCargo"
         android:layout_width="250dp"
         android:layout_height="35dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@id/etName"
-        app:layout_constraintTop_toBottomOf="@id/center"
+        app:layout_constraintTop_toBottomOf="@id/etName"
         app:layout_constraintBottom_toTopOf="@id/spAgencia"/>
 
     <Spinner
         android:id="@+id/spAgencia"
         android:layout_width="250dp"
         android:layout_height="35dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@id/etName"
         app:layout_constraintTop_toBottomOf="@+id/spCargo"
         app:layout_constraintBottom_toTopOf="@id/btNext"/>
@@ -73,25 +77,140 @@
         android:id="@+id/btNext"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
         android:background="#65C734"
         android:text="Próximo"
         android:textColor="#fff"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/spAgencia"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnPrevious"/>
+        app:layout_constraintTop_toBottomOf="@id/spAgencia"
+        />
 
     <Button
         android:id="@+id/btnPrevious"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:background="#65C734"
         android:text="Voltar"
         android:textColor="#fff"
-        app:layout_constraintTop_toBottomOf="@+id/spAgencia"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btNext"/>
+        app:layout_constraintTop_toBottomOf="@id/spAgencia"
+        />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="250dp"
+        android:layout_height="122dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/logo_fk_2015" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".activities.RegisterActivity">-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/sicredi"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/logo_fk_2015" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/etUsername"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Usuário"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:inputType="textPersonName"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/etName"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/sicredi"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/etName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Nome"-->
+<!--        android:inputType="textPersonName"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/center"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/etUsername" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/center"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        />-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spCargo"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        app:layout_constraintStart_toStartOf="@id/etName"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/center"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/spAgencia"/>-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spAgencia"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        app:layout_constraintStart_toStartOf="@id/etName"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/spCargo"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/btNext"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btNext"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#65C734"-->
+<!--        android:text="Próximo"-->
+<!--        android:textColor="#fff"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/spAgencia"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/btnPrevious"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnPrevious"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#65C734"-->
+<!--        android:text="Voltar"-->
+<!--        android:textColor="#fff"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/spAgencia"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/btNext"/>-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

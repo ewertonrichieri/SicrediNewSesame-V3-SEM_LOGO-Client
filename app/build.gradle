@@ -20,10 +20,15 @@ android {
 //            applicationIdSuffix ".poc"
 //            resValue "string", "app_name", "Sicredi Sesame"
 //        }
-        client {
+//        client {
+//            dimension"default"
+//            applicationIdSuffix ".client"
+//            resValue "string", "app_name", "Facekey Client"
+//        }
+        clientSicrediAg0001 {
             dimension"default"
-            applicationIdSuffix ".client"
-            resValue "string", "app_name", "Facekey Client"
+            applicationIdSuffix ".clientSicrediAg0001"
+            resValue "string", "app_name", "Sicredi"
         }
 //        sicredi {
 //            dimension"default"

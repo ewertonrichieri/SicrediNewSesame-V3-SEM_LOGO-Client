@@ -66,7 +66,7 @@
     <string name="sesameVideoMp4">/SesameVideo.mp4</string>
     <string name="registrado">Registrado</string>
 <!--    <string name="server_anyvision">http://latam-sesame.anyvision.co:3003</string>-->
-    <string name="server_anyvision">http://200.188.213.130:3003</string>
+<!--    <string name="server_anyvision">http://200.188.213.130:3003</string>-->
 
     <!-- LoginActivity -->
     <string name="enableBtnRegister">enableBtnRegister</string>

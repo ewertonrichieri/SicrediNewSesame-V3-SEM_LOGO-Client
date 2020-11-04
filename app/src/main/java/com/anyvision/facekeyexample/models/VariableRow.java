@@ -68,6 +68,28 @@ public class VariableRow {
     @Path("VariableRow[15]")
     private String description15;
 
+
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[16]")
+    private String description16;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[17]")
+    private String description17;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[18]")
+    private String description18;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[19]")
+    private String description19;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[20]")
+    private String description20;
+
     public ArrayList<String> getListaDescription(){
         ArrayList<String> listaDescriptions = new ArrayList<String>();
         listaDescriptions.add(description2);
@@ -77,6 +99,9 @@ public class VariableRow {
         listaDescriptions.add(description6);
         listaDescriptions.add(description7);
         listaDescriptions.add(description15);
+        listaDescriptions.add(description17);
+        //listaDescriptions.add(description16);
+
 
         return listaDescriptions;
     }

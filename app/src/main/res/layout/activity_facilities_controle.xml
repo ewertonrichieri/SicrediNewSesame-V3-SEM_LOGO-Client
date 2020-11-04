@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.anyvision.facekeyexample.activities.logged.FacilitiesControleActivity">
+
+    <ImageView
+        android:id="@+id/sicredi"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.12"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_fk_2015" />
+
+    <EditText
+        android:id="@+id/edtDataFacilities"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:hint="Para qual data você precisa?"
+        android:text=""
+        android:textAlignment="right"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sicredi" />
+
+    <ImageButton
+        android:id="@+id/btnCalendarioFacilities"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+          android:src="@drawable/calendario"
+        app:layout_constraintHeight_percent="0.060"
+        app:layout_constraintWidth_percent="0.080"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:text="Selecione a Data"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="@+id/edtDataFacilities"
+        app:layout_constraintStart_toEndOf="@id/edtDataFacilities"
+        app:layout_constraintStart="parent"
+       />
+
+    <EditText
+        android:id="@+id/editQtdHoras"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Quantas horas?"
+        android:text=""
+        android:textAlignment="right"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtDataFacilities" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         btnLigarDesligarLuzes.setText(listaDescriptions.get(3));
 
         btnChamado.setVisibility(View.VISIBLE);
-        btnChamado.setText(listaDescriptions.get(5));
+        btnChamado.setText(listaDescriptions.get(7));
 
         btnPanico.setVisibility(View.VISIBLE);
         btnPanico.setText(listaDescriptions.get(4));
@@ -157,11 +157,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //GESTAO
         btnChamado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    ChamadoActivity.startActivity(MainActivity.this);
+                    GestaoActivity.startActivity(MainActivity.this);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

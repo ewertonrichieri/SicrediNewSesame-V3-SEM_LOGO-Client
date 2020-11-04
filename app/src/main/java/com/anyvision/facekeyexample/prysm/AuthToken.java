@@ -1,5 +1,8 @@
 package com.anyvision.facekeyexample.prysm;
 
+import com.anyvision.facekeyexample.models.ChamadoGrafico;
+import com.anyvision.facekeyexample.models.Facilities;
+import com.anyvision.facekeyexample.models.GetGroups.Groups;
 import com.anyvision.facekeyexample.models.SolicitationExtension;
 import com.anyvision.facekeyexample.models.VariableRow;
 import com.anyvision.facekeyexample.models.VariableRowChamado;
@@ -48,5 +51,17 @@ public interface AuthToken {
     @Headers({"Accept: application/xml"})
     @GET("AppVisionService.svc/GetVariableStatesByFilter?filters=$V.App.REGIONAL.POC.*")
     Call<SolicitationExtension> GetSolicitHistApprovedReproved(@Header("SessionID") String SessionID);
+
+    @Headers({"Accept: application/xml"})
+    @GET("AppVisionService.svc/GetVariablesByFilter?filters=$V.App.AGENCIA.POC.AGENCIA0001.Facilities*,Type=Int")
+    Call<Facilities> GetFacilities(@Header("SessionID") String SessionID);
+
+    @Headers({"Accept: application/xml"})
+    @GET("AppVisionService.svc/GetVariableStatesByFilter?filters=$V.Gestao.Graficos.Chamados*")
+    Call<ChamadoGrafico> GetGestaoControleSalas(@Header("SessionID") String SessionId);
+
+//    @Headers({"Accept: application/xml"})
+//    @GET("AppVisionService.svc/GetGroups")
+//    Call<Groups> GetGroups(@Header("SessionID") String SessionId);
 
 }

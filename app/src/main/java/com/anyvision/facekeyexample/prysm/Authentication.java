@@ -22,6 +22,10 @@ import com.anyvision.facekeyexample.FacekeyApplication;
 import com.anyvision.facekeyexample.activities.logged.SolicitationExtensionActivity;
 import com.anyvision.facekeyexample.activities.logged.SolicitationHistoryApproved;
 import com.anyvision.facekeyexample.activities.logged.SolicitationHistoryReproved;
+import com.anyvision.facekeyexample.models.ChamadoGrafico;
+import com.anyvision.facekeyexample.models.Facilities;
+import com.anyvision.facekeyexample.utils.Enum;
+import com.anyvision.facekeyexample.models.GetGroups.Groups;
 import com.anyvision.facekeyexample.models.GetVariables;
 import com.anyvision.facekeyexample.models.MessageTopic;
 import com.anyvision.facekeyexample.models.SolicitationExtension;
@@ -39,6 +43,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.internal.ws.RealWebSocket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -291,6 +296,9 @@ public class Authentication extends Application {
                 if (response.isSuccessful()) {
                     VariableRow desc = response.body();
 
+                    GetDescricaoBtnFacilities(SessionID);
+                    //closeSession(SessionID);
+
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.clear().commit();
@@ -307,7 +315,6 @@ public class Authentication extends Application {
                     Log.d("auth", response.message());
                     assert response.body() != null;
                     Log.d("auth", response.body().toString());
-                    closeSession(SessionID);
 
                 } else {
                     assert response.errorBody() != null;
@@ -504,7 +511,7 @@ public class Authentication extends Application {
     }
 
     public void GetVariableDescripBtnChamado(final String SessionID) {
-        Log.d("chamadoLista", "GetVariableDescripBtnChamado");
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(serverLocalUrl)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
@@ -536,8 +543,6 @@ public class Authentication extends Application {
                     }
 
                     editor.apply();
-
-                    closeSession(SessionID);
 
                 } else {
                     assert response.errorBody() != null;
@@ -694,6 +699,181 @@ public class Authentication extends Application {
             }
         });
     }
+
+    public void requestTokenGestao() {
+
+        final String AccountType = GetVariables.getInstance().getSpTypeAccount();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        final AuthToken tokenAuth = retrofit.create(AuthToken.class);
+        Call<ResponseBody> call = tokenAuth.getToken();
+
+        call.enqueue(new Callback<ResponseBody>() {
+            private String token;
+            private String hashpassword;
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                try {
+                    token = cleanOUTPUT(response.body().string());
+                    hashpassword = md5(token + md5(AccountType + AccountType));
+                    if (response.isSuccessful()) {
+                        if (getContext() == null) {
+                            mContext = FacekeyApplication.getAppContext();
+                        }
+                        GetChamadoControleSalaGrafico(token);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("ErroConexao", t.getMessage());
+            }
+        });
+    }
+
+    public void GetDescricaoBtnFacilities(final String SessionID){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .build();
+        AuthToken authToken = retrofit.create(AuthToken.class);
+
+        Call<Facilities> call = authToken.GetFacilities(SessionID);
+
+        call.enqueue(new Callback<Facilities>() {
+            @Override
+            public void onResponse(Call<Facilities> call, Response<Facilities> response) {
+
+                if(response.isSuccessful()){
+                    Facilities facilities = response.body();
+
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    GetChamadoControleSalaGrafico(SessionID);
+                    //closeSession(SessionID);
+
+                    ArrayList<String> listaDescricaoBtnFacilities = facilities.GetDescricaoBtnFacilities();
+
+                    editor.putInt("facilitiesDescricaoBtn_size", listaDescricaoBtnFacilities.size());
+                    for (int i = 0; i < facilities.GetDescricaoBtnFacilities().size(); i++){
+                        editor.putString("facilitiesDescricaoBtn" + "_" + i, listaDescricaoBtnFacilities.get(i));
+                    }
+                    editor.apply();
+                }
+                else{
+                    closeSession(SessionID);
+                }
+            }
+            @Override
+            public void onFailure(Call<Facilities> call, Throwable t) {
+            Log.d("auth", t.getMessage());
+            }
+        });
+    }
+
+//    public void GetGroups(final String SessionID) {
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(serverLocalUrl)
+//                .addConverterFactory(SimpleXmlConverterFactory.create())
+//                .build();
+//        AuthToken tokenAuth = retrofit.create(AuthToken.class);
+//
+//        Call<Groups> call = tokenAuth.GetGroups(SessionID);
+//
+//        call.enqueue(new Callback<Groups>() {
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public void onResponse(Call<Groups> call, Response<Groups> response) {
+//                if (response.isSuccessful()) {
+//
+//                    //GetDescricaoBtnFacilities(SessionID);
+//                    closeSession(SessionID);
+//
+//                    Groups listaGruposPrysm = response.body();
+//
+//                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//
+//                    ArrayList<String> listaGrupos = listaGruposPrysm.getGroup();
+//                    editor.putInt("chamado_grafico_grupos_size", listaGrupos.size());
+//                    for (int i = 0; i < listaGrupos.size(); i++) {
+//                        editor.putString("chamado_grafico_grupos" + "_" + i, listaGrupos.get(i).toString());
+//                    }
+//
+//                    editor.apply();
+//
+//                } else {
+//                    assert response.errorBody() != null;
+//                    closeSession(SessionID);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Groups> call1, Throwable t) {
+//                Log.d("auth", t.getMessage());
+//            }
+//        });
+//    }
+
+    public void GetChamadoControleSalaGrafico(final String SessionID) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .build();
+        AuthToken tokenAuth = retrofit.create(AuthToken.class);
+
+        Call<ChamadoGrafico> call = tokenAuth.GetGestaoControleSalas(SessionID);
+
+        call.enqueue(new Callback<ChamadoGrafico>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<ChamadoGrafico> call, Response<ChamadoGrafico> response) {
+                Log.d("e", response.toString());
+                if (response.isSuccessful()) {
+
+                    ChamadoGrafico liGestaoCtrSala = response.body();
+
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    ArrayList<String> listaDescriptions = liGestaoCtrSala.GetListaGestaoControleSala();
+                    int valorTotal = liGestaoCtrSala.GetPorcentagemTotalGestaoControleSala();
+
+                    editor.putInt(Enum.SharedPrivate.CHAMADO_GESTAO_VALOR_TOTAL.toString(), valorTotal);
+                    editor.putInt(Enum.SharedPrivate.CHAMADO_GESTAO_CONTROLE_SALA_SIZE.toString(), listaDescriptions.size());
+                    for (int i = 0; i < liGestaoCtrSala.GetListaGestaoControleSala().size(); i++) {
+                        editor.putString(Enum.SharedPrivate.GRAFICO_CHAMADO.toString() + "_" + i, listaDescriptions.get(i).replace("Gestao.Graficos.Chamados.", ""));
+                    }
+                    //teste
+
+                    editor.apply();
+                    closeSession(SessionID);
+                    //GetChamadoControleSalaGrafico(SessionID);
+
+                } else {
+                    assert response.errorBody() != null;
+                    closeSession(SessionID);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ChamadoGrafico> call1, Throwable t) {
+                Log.d("auth", t.getMessage());
+            }
+        });
+    }
+
+
 
     public static Context getContext() {
         return mContext;

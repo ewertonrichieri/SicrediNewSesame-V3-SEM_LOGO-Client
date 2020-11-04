@@ -19,6 +19,7 @@ public class GetVariables {
     private static String etRegisterName;
     private static String etRegisterCargo;
     private static String etRegisterLocalAgencia;
+    private static String txtLabelSliceClickChart;
 
     private GetVariables(){
         localServerUrl = "";
@@ -30,6 +31,14 @@ public class GetVariables {
         }
 
         return getVariablesInstance;
+    }
+
+    public void SetTxtLabelSliceClickChart(String txtLabel){
+        txtLabelSliceClickChart = txtLabel;
+    }
+
+    public String GetTxtLabelSliceClickChart(){
+        return txtLabelSliceClickChart;
     }
 
     public void setServerUrl(String url){

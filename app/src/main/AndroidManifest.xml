@@ -13,25 +13,19 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
-
-
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
         android:required="false" />
 
-    <uses-permission
-        android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <uses-feature
         android:name="android.hardware.camera.front"
         android:required="false" />
-
 
     <application
         android:name=".FacekeyApplication"
@@ -42,30 +36,30 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:theme">
+        <activity android:name=".activities.logged.FacilitiesControleActivity"></activity>
+        <activity android:name=".activities.logged.ChamadoGraficoBarraActivity" />
+        <activity android:name=".activities.logged.ChamadoGraficoActivity" />
+        <activity android:name=".activities.logged.FacilitiesActivity" />
+        <activity android:name=".activities.logged.GestaoActivity" />
         <activity
             android:name=".activities.logged.SolicitationHistoryApproved"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity android:name=".activities.logged.SolicitationHistoryReproved"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".activities.logged.SolicitationExtensionActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.RegisterActivity"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.logged.SolicitationHistoryReproved"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.logged.SolicitationExtensionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activities.logged.TimeActivity" />
-
-        <activity android:name=".activities.logged.MainActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.logged.ChamadoActivity"
-            android:screenOrientation="portrait"/>
-
-
+        <activity
+            android:name=".activities.logged.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.logged.ChamadoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.CameraActivity"
             android:screenOrientation="portrait" />
@@ -82,16 +76,18 @@
             android:name=".activities.SettingsActivity"
             android:screenOrientation="portrait" />
 
-
         <receiver
             android:name=".GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
+
                 <!-- Receives the actual messages. -->
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.google.android.gcm.demo.app" />
             </intent-filter>
         </receiver>
+
         <service android:name=".GcmIntentService" />
 
         <activity
@@ -109,15 +105,14 @@
         <activity
             android:name=".activities.LoginCameraActivity"
             android:screenOrientation="portrait" /> <!-- para trabalhar com notificação em segundo plano -->
-
-        <service android:name=".firebase.Notification"
+        <service
+            android:name=".firebase.Notification"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service> <!-- para ter nivel de api 26 para cima -->
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" /> <!-- quando esta em segundo plano vai aparecer este icone -->
@@ -132,13 +127,9 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
-
-
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-            android:value="face" />
-        <!-- To use multiple models: android:value="face,model2,model3" -->
-
+            android:value="face" /> <!-- To use multiple models: android:value="face,model2,model3" -->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

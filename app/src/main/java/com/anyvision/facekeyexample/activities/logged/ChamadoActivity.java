@@ -139,4 +139,6 @@ public class ChamadoActivity extends AppCompatActivity {
         Intent intent = new Intent(from, ChamadoActivity.class);
         from.startActivity(intent);
     }
+
+    public void onBackPressed(){ GestaoActivity.startActivity(ChamadoActivity.this);}
 }

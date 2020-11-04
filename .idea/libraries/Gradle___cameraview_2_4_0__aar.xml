@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: :cameraview-2.4.0:@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8ae2ef7d1a145f3cf74d6a4c8ee9e764/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f6017ab7c867f882e594c4694836c231/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8ae2ef7d1a145f3cf74d6a4c8ee9e764/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8ae2ef7d1a145f3cf74d6a4c8ee9e764/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f6017ab7c867f882e594c4694836c231/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f6017ab7c867f882e594c4694836c231/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

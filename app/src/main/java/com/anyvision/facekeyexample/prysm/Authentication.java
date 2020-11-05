@@ -1,5 +1,6 @@
 package com.anyvision.facekeyexample.prysm;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -38,9 +39,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import io.reactivex.Observable;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
+import io.reactivex.functions.Consumer;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import okhttp3.internal.ws.RealWebSocket;
@@ -188,17 +193,14 @@ public class Authentication extends Application {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.d("chamado", "acho q setou agora a variavel");
+                Log.d("chamado", response.toString());
 
                 showToast(response.code());
                 if (response.isSuccessful()) {
-                    Log.d("chamado", "SETOU SIM");
-
                     if (MessageTopic.getMessage() != null && MessageTopic.getTitle() != null && MessageTopic.getTitle() != null)
                         iniciarNotificacao(MessageTopic.getTopic(), MessageTopic.getTitle(), MessageTopic.getMessage());
 
                     if (name.contains(".Reprogramacao") && SolicitationExtensionActivity.onActive()) {
-
                         GetVariableStateSolicitHistory(SessionId);
                     } else {
                         closeSession(SessionId);
@@ -700,7 +702,7 @@ public class Authentication extends Application {
         });
     }
 
-    public void requestTokenGestao() {
+    public void requestTokenGestao(final String name, final String newValue, final String activity) {
 
         final String AccountType = GetVariables.getInstance().getSpTypeAccount();
         Retrofit retrofit = new Retrofit.Builder()
@@ -724,7 +726,59 @@ public class Authentication extends Application {
                         if (getContext() == null) {
                             mContext = FacekeyApplication.getAppContext();
                         }
+
+                        if(activity.equals("FacilitiesControleActivity"))
+                        {
+                            getAuthentication(token, hashpassword, name, newValue);
+                        }
+
                         GetChamadoControleSalaGrafico(token);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("ErroConexao", t.getMessage());
+            }
+        });
+    }
+
+    public void requestTokenFacilities(final ArrayList<String> lista) {
+
+        final String AccountType = GetVariables.getInstance().getSpTypeAccount();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        final AuthToken tokenAuth = retrofit.create(AuthToken.class);
+        Call<ResponseBody> call = tokenAuth.getToken();
+
+        call.enqueue(new Callback<ResponseBody>() {
+            private String token;
+            private String hashpassword;
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                try {
+                    token = cleanOUTPUT(response.body().string());
+                    hashpassword = md5(token + md5(AccountType + AccountType));
+                    if (response.isSuccessful()) {
+                        if (getContext() == null) {
+                            mContext = FacekeyApplication.getAppContext();
+                        }
+
+                        for(String li : lista){
+                            String[] valores = li.split(";");
+                            String name = valores[0];
+                            String newValue = valores[1];
+
+                            setVariableFacilities(token, name, newValue);
+                        }
+
+                        closeSession(token);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -778,6 +832,9 @@ public class Authentication extends Application {
             }
         });
     }
+
+
+
 
 //    public void GetGroups(final String SessionID) {
 //
@@ -869,6 +926,36 @@ public class Authentication extends Application {
             @Override
             public void onFailure(Call<ChamadoGrafico> call1, Throwable t) {
                 Log.d("auth", t.getMessage());
+            }
+        });
+    }
+
+
+    private void setVariableFacilities(final String SessionId, final String name, final String newValue) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+        AuthToken tokenAuth = retrofit.create(AuthToken.class);
+
+        Call<Void> call = tokenAuth.setVariable(SessionId, name, newValue);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("teste", response.toString());
+
+                showToast(response.code());
+                if (response.isSuccessful()) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+                Log.d("ErroConexao", t.getMessage());
+                closeSession(SessionId);
             }
         });
     }

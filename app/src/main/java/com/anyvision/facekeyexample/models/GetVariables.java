@@ -20,6 +20,7 @@ public class GetVariables {
     private static String etRegisterCargo;
     private static String etRegisterLocalAgencia;
     private static String txtLabelSliceClickChart;
+    private static String txtOpcaoFacilities;
 
     private GetVariables(){
         localServerUrl = "";
@@ -126,5 +127,11 @@ public class GetVariables {
 
     public void setNameAgencia(String nmAgencia){
         GetVariables.nameAgencia = nameAgencia;
+    }
+
+    public String getOpcaoFacilities() {return txtOpcaoFacilities; }
+
+    public void setTxtOpcaoFacilities(String opcaoFacilities) {
+        GetVariables.txtOpcaoFacilities = opcaoFacilities;
     }
 }

@@ -20,6 +20,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_fk_2015" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solicitação de Serviço"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/sicredi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+
     <EditText
         android:id="@+id/edtDataFacilities"
         android:layout_width="260dp"
@@ -27,7 +40,7 @@
         android:layout_marginTop="150dp"
         android:hint="Para qual data você precisa?"
         android:text=""
-        android:textAlignment="right"
+
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +60,6 @@
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="@+id/edtDataFacilities"
         app:layout_constraintStart_toEndOf="@id/edtDataFacilities"
-        app:layout_constraintStart="parent"
        />
 
     <EditText
@@ -57,13 +69,76 @@
         android:layout_marginTop="20dp"
         android:hint="Quantas horas?"
         android:text=""
-        android:textAlignment="right"
+
         android:textSize="16dp"
+
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edtDataFacilities" />
 
+    <EditText
+        android:id="@+id/editQtdProfissionais"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Quantos profissionais?"
 
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editQtdHoras" />
+
+     <CheckBox
+         android:id="@+id/checkboxOpcao"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="20dp"
+         android:text="Armado"
+         app:layout_constraintStart_toStartOf="@id/editQtdProfissionais"
+         app:layout_constraintTop_toBottomOf="@id/editQtdProfissionais"
+         />
+
+    <CalendarView
+        android:id="@+id/calendarioFacilities"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#ffffff"
+        />
+
+    <Button
+        android:id="@+id/btnSelecionarData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        android:text="Selecionar"
+        android:background="#0000FF"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/calendarioFacilities"
+        app:layout_constraintStart_toStartOf="@+id/calendarioFacilities"
+        app:layout_constraintEnd_toEndOf="@+id/calendarioFacilities"
+        />
+
+    <Button
+        android:id="@+id/btnSolicitarFacilities"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        app:layout_constraintWidth_percent="0.8"
+        android:text="Solicitar"
+        android:background="#65C734"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/checkboxOpcao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

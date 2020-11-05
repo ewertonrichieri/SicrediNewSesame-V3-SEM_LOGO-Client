@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 7
-        versionName "1.6"
+        versionName "2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -108,5 +108,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-vision-image-label:18.0.4'
     implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    implementation "io.reactivex.rxjava2:rxjava:2.2.6"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 }
 apply plugin: 'com.google.gms.google-services'

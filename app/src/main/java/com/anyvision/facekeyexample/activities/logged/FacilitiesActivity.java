@@ -1,7 +1,5 @@
 package com.anyvision.facekeyexample.activities.logged;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,8 +8,11 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.anyvision.facekeyexample.R;
-import com.anyvision.facekeyexample.models.Facilities;
+import com.anyvision.facekeyexample.models.GetVariables;
+import com.anyvision.facekeyexample.utils.Enum;
 
 import java.util.ArrayList;
 
@@ -44,61 +45,61 @@ public class FacilitiesActivity extends AppCompatActivity {
         btnControladorAcesso.setText(listaFacilitiesDescricaoBtn.get(2));
         btnBombeiro.setText(listaFacilitiesDescricaoBtn.get(3));
 
-        btnVigilante.setOnClickListener(new View.OnClickListener(){
+        btnVigilante.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                try{
-
-                }
-                catch (Exception e){
+            public void onClick(View view) {
+                try {
+                    GetVariables.getInstance().setTxtOpcaoFacilities(Enum.Facilities.VIGILANTE.toString());
+                    FacilitiesControleActivity.startActivity(FacilitiesActivity.this);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-        btnRecepcionista.setOnClickListener(new View.OnClickListener(){
+        btnRecepcionista.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                try{
-
-                }
-                catch (Exception e){
+            public void onClick(View view) {
+                try {
+                    GetVariables.getInstance().setTxtOpcaoFacilities(Enum.Facilities.RECEPCIONISTA.toString());
+                    FacilitiesControleActivity.startActivity(FacilitiesActivity.this);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-        btnControladorAcesso.setOnClickListener(new View.OnClickListener(){
+        btnControladorAcesso.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                try{
-
-                }
-                catch (Exception e){
+            public void onClick(View view) {
+                try {
+                    GetVariables.getInstance().setTxtOpcaoFacilities(Enum.Facilities.CONTROLADOR.toString());
+                    FacilitiesControleActivity.startActivity(FacilitiesActivity.this);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-        btnBombeiro.setOnClickListener(new View.OnClickListener(){
+        btnBombeiro.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                try{
-
-                }
-                catch (Exception e){
+            public void onClick(View view) {
+                try {
+                    GetVariables.getInstance().setTxtOpcaoFacilities(Enum.Facilities.BOMBEIRO.toString());
+                    FacilitiesControleActivity.startActivity(FacilitiesActivity.this);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public static void startActivity(Context from){
+    public static void startActivity(Context from) {
         Intent intent = new Intent(from, FacilitiesActivity.class);
         from.startActivity(intent);
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         GestaoActivity.startActivity(FacilitiesActivity.this);
     }
 }

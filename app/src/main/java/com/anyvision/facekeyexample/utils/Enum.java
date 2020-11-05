@@ -43,4 +43,12 @@ public class Enum {
         ARCONDICIONADO,
         SISTEMA_INCÊNDIO
     }
+
+    public enum Facilities{
+        VIGILANTE,
+        RECEPCIONISTA,
+        BOMBEIRO,
+        CONTROLADOR
+
+    }
 }

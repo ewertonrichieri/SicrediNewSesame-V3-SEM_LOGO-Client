@@ -27,7 +27,8 @@ public class GestaoActivity extends AppCompatActivity {
         btnChamadoGestao = findViewById(R.id.btnChamadoGestao);
         btnGraficoGestao = findViewById(R.id.btnGraficoGestao);
         auth = new Authentication(GetVariables.getInstance().getServerUrl());
-        auth.requestTokenGestao();
+
+        //auth.requestTokenGestao();
 
         btnFacilitiesGestao.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,8 +6,13 @@ import com.anyvision.facekeyexample.models.GetGroups.Groups;
 import com.anyvision.facekeyexample.models.SolicitationExtension;
 import com.anyvision.facekeyexample.models.VariableRow;
 import com.anyvision.facekeyexample.models.VariableRowChamado;
+
+import java.util.List;
+import io.reactivex.Observable;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -61,7 +66,7 @@ public interface AuthToken {
     Call<ChamadoGrafico> GetGestaoControleSalas(@Header("SessionID") String SessionId);
 
 //    @Headers({"Accept: application/xml"})
-//    @GET("AppVisionService.svc/GetGroups")
-//    Call<Groups> GetGroups(@Header("SessionID") String SessionId);
+//    @GET("AppVisionService.svc/SetVariable?changeOnly=false&severity=-1&quality=-1")
+//    Observable<Void> setMultipleVariable(@Header("SessionID") String SessionId, @Query("name") String name, @Query("newValue") String newValue);
 
 }

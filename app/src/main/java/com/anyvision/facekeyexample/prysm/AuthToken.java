@@ -58,7 +58,7 @@ public interface AuthToken {
     Call<SolicitationExtension> GetSolicitHistApprovedReproved(@Header("SessionID") String SessionID);
 
     @Headers({"Accept: application/xml"})
-    @GET("AppVisionService.svc/GetVariablesByFilter?filters=$V.App.AGENCIA.POC.AGENCIA0001.Facilities*,Type=Int")
+    @GET("AppVisionService.svc/GetVariablesByFilter?filters=$V.App.AGENCIA.POC.AGENCIA0001.Facilities*,Type=Enum")
     Call<Facilities> GetFacilities(@Header("SessionID") String SessionID);
 
     @Headers({"Accept: application/xml"})

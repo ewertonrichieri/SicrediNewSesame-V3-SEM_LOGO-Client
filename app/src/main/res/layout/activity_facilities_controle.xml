@@ -21,6 +21,7 @@
         app:srcCompat="@drawable/logo_fk_2015" />
 
     <TextView
+        android:id="@+id/txtInfoTelaProfissao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Solicitação de Serviço"
@@ -104,19 +105,19 @@
         android:id="@+id/calendarioFacilities"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.8"
+        android:layout_marginTop="45dp"
+        app:layout_constraintWidth_percent="0.9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="#ffffff"
+        android:background="#F0F0F0"
         />
 
     <Button
         android:id="@+id/btnSelecionarData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintWidth_percent="0.9"
         android:text="Selecionar"
         android:background="#0000FF"
         android:textColor="#ffffff"

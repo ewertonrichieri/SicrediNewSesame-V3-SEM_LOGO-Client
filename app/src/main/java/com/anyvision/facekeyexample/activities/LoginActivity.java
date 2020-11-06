@@ -37,6 +37,10 @@ import com.anyvision.sesame.Sesame;
 import com.google.firebase.messaging.FirebaseMessaging;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class LoginActivity extends BaseActivity {
 
@@ -205,6 +209,7 @@ public class LoginActivity extends BaseActivity {
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();

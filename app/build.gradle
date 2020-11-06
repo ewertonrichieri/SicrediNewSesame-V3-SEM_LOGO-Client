@@ -41,15 +41,15 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            def project = "fk"
+            def project = "Facekey-Client"
             def SEP = "_"
 /*            if(variant.productFlavors[0].name) {
                 def flavor = variant.productFlavors[0].name
                 fk_app_001_ra
             }*/
             def buildType = variant.variantData.variantConfiguration.buildType.name
-            def version = variant.versionName
-            def versionForm = "ra"
+            def version = "V"+variant.versionName
+            def versionForm = "(logo-fortknox)"
             def date = new Date()
             def formattedDate = date.format('ddMMyy_HHmm')
 

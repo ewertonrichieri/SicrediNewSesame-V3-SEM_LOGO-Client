@@ -1,7 +1,5 @@
 package com.anyvision.facekeyexample.models;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
@@ -14,12 +12,12 @@ public class Facilities {
     @ElementList(entry = "VariableRow", inline = true, required = false)
     private List<Descriptions> facilitiesDescriptions;
 
-    public ArrayList<String> GetDescricaoBtnFacilities(){
+    public ArrayList<String> GetDescricaoBtnFacilities() {
         ArrayList<String> listaDescricao = new ArrayList<String>();
 
-        for(Descriptions li : facilitiesDescriptions){
+        for (Descriptions li : facilitiesDescriptions) {
             listaDescricao.add(li.GetDescription());
         }
-        return  listaDescricao;
+        return listaDescricao;
     }
 }

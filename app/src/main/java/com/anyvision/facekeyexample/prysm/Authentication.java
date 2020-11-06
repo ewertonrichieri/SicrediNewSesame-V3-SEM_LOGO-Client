@@ -1,6 +1,5 @@
 package com.anyvision.facekeyexample.prysm;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,13 +24,12 @@ import com.anyvision.facekeyexample.activities.logged.SolicitationHistoryApprove
 import com.anyvision.facekeyexample.activities.logged.SolicitationHistoryReproved;
 import com.anyvision.facekeyexample.models.ChamadoGrafico;
 import com.anyvision.facekeyexample.models.Facilities;
-import com.anyvision.facekeyexample.utils.Enum;
-import com.anyvision.facekeyexample.models.GetGroups.Groups;
 import com.anyvision.facekeyexample.models.GetVariables;
 import com.anyvision.facekeyexample.models.MessageTopic;
 import com.anyvision.facekeyexample.models.SolicitationExtension;
 import com.anyvision.facekeyexample.models.VariableRow;
 import com.anyvision.facekeyexample.models.VariableRowChamado;
+import com.anyvision.facekeyexample.utils.Enum;
 
 import org.json.JSONObject;
 
@@ -39,16 +37,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import io.reactivex.Observable;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
-import io.reactivex.functions.Consumer;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
-import okhttp3.internal.ws.RealWebSocket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -157,16 +150,11 @@ public class Authentication extends Application {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("auth", response.toString());
                 if (response.isSuccessful()) {
-                    Log.d("auth", "Passou in getAuthentication");
-                    Log.d("auth", String.valueOf(response.code()));
-                    Log.d("auth", response.toString());
-
                     setVariable(SessionId, name, newValue);
+
                 } else {
-                    Log.d("ErroConexao", "FECHOU E ABRIU DENOVO in getAuthentication");
-                    Log.d("ErroConexao", String.valueOf(response.code()));
-                    Log.d("ErroConexao", response.toString());
                     if (response.code() == 402)
                         showToast(response.code());
 
@@ -684,13 +672,9 @@ public class Authentication extends Application {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Log.d("auth", "close session sucess");
                     Log.d("auth", String.valueOf(response.code()));
-                    Log.d("auth", response.toString());
                 } else {
-                    Log.d("auth", "close session failed");
                     Log.d("auth", String.valueOf(response.code()));
-                    Log.d("auth", response.toString());
                 }
             }
 
@@ -727,8 +711,7 @@ public class Authentication extends Application {
                             mContext = FacekeyApplication.getAppContext();
                         }
 
-                        if(activity.equals("FacilitiesControleActivity"))
-                        {
+                        if (activity.equals("FacilitiesControleActivity")) {
                             getAuthentication(token, hashpassword, name, newValue);
                         }
 
@@ -738,6 +721,7 @@ public class Authentication extends Application {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("ErroConexao", t.getMessage());
@@ -770,7 +754,7 @@ public class Authentication extends Application {
                             mContext = FacekeyApplication.getAppContext();
                         }
 
-                        for(String li : lista){
+                        for (String li : lista) {
                             String[] valores = li.split(";");
                             String name = valores[0];
                             String newValue = valores[1];
@@ -784,6 +768,7 @@ public class Authentication extends Application {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("ErroConexao", t.getMessage());
@@ -791,7 +776,7 @@ public class Authentication extends Application {
         });
     }
 
-    public void GetDescricaoBtnFacilities(final String SessionID){
+    public void GetDescricaoBtnFacilities(final String SessionID) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(serverLocalUrl)
@@ -804,36 +789,36 @@ public class Authentication extends Application {
         call.enqueue(new Callback<Facilities>() {
             @Override
             public void onResponse(Call<Facilities> call, Response<Facilities> response) {
+                try {
+                    if (response.isSuccessful()) {
+                        Facilities facilities = response.body();
 
-                if(response.isSuccessful()){
-                    Facilities facilities = response.body();
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                        GetChamadoControleSalaGrafico(SessionID);
 
-                    GetChamadoControleSalaGrafico(SessionID);
-                    //closeSession(SessionID);
+                        ArrayList<String> listaDescricaoBtnFacilities = facilities.GetDescricaoBtnFacilities();
 
-                    ArrayList<String> listaDescricaoBtnFacilities = facilities.GetDescricaoBtnFacilities();
-
-                    editor.putInt("facilitiesDescricaoBtn_size", listaDescricaoBtnFacilities.size());
-                    for (int i = 0; i < facilities.GetDescricaoBtnFacilities().size(); i++){
-                        editor.putString("facilitiesDescricaoBtn" + "_" + i, listaDescricaoBtnFacilities.get(i));
+                        editor.putInt("facilitiesDescricaoBtn_size", listaDescricaoBtnFacilities.size());
+                        for (int i = 0; i < facilities.GetDescricaoBtnFacilities().size(); i++) {
+                            editor.putString("facilitiesDescricaoBtn" + "_" + i, listaDescricaoBtnFacilities.get(i));
+                        }
+                        editor.apply();
+                    } else {
+                        closeSession(SessionID);
                     }
-                    editor.apply();
-                }
-                else{
-                    closeSession(SessionID);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<Facilities> call, Throwable t) {
-            Log.d("auth", t.getMessage());
+                Log.d("auth", t.getMessage());
             }
         });
     }
-
-
 
 
 //    public void GetGroups(final String SessionID) {
@@ -959,7 +944,6 @@ public class Authentication extends Application {
             }
         });
     }
-
 
 
     public static Context getContext() {

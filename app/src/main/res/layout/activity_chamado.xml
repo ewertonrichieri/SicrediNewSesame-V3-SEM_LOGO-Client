@@ -10,9 +10,10 @@
     <ImageView
         android:id="@+id/sicredi"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.12"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -23,9 +24,10 @@
     <Button
         android:id="@+id/btnCFTV"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.15"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:textColor="#fff"
@@ -33,14 +35,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sicredi" />
+        app:layout_constraintTop_toBottomOf="@+id/sicredi"
+        app:layout_constraintBottom_toTopOf="@+id/btbAlarmeChamado"
+        />
 
     <Button
         android:id="@+id/btbAlarmeChamado"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.15"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:textColor="#fff"
@@ -48,14 +53,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCFTV" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCFTV"
+        app:layout_constraintBottom_toTopOf="@id/btnSistemaIncendio"/>
 
     <Button
         android:id="@+id/btnSistemaIncendio"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.15"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:textColor="#fff"
@@ -63,14 +70,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btbAlarmeChamado" />
+        app:layout_constraintTop_toBottomOf="@+id/btbAlarmeChamado"
+        app:layout_constraintBottom_toTopOf="@id/btnHVAC"/>
+
 
     <Button
         android:id="@+id/btnHVAC"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.15"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:textColor="#fff"
@@ -78,14 +88,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSistemaIncendio" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSistemaIncendio"
+        app:layout_constraintBottom_toTopOf="@+id/btnArCondicionado"
+        />
 
     <Button
         android:id="@+id/btnArCondicionado"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.15"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="40dp"
+
         android:layout_marginEnd="8dp"
         android:background="#65C734"
         android:textColor="#fff"
@@ -93,7 +108,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHVAC" />
+        app:layout_constraintTop_toBottomOf="@+id/btnHVAC"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <FrameLayout
         android:layout_width="match_parent"

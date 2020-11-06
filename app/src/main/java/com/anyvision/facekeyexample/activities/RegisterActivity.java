@@ -51,7 +51,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-
                     String username = etUsername.getText().toString();
                     String nome = etNome.getText().toString();
                     GetVariables.getInstance().setEtRegisterUsername(username);
@@ -60,10 +59,10 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Por favor, preencha os campos vazios!", Toast.LENGTH_LONG).show();
                         return;
                     } else {
-                        Firebase.getInstance().createUser(etUsername.getText().toString(),
-                                etNome.getText().toString(),
-                                spCargo.getSelectedItem().toString(),
-                                spAgencia.getSelectedItem().toString());
+                        GetVariables.getInstance().setEtRegisterUsername(username);
+                        GetVariables.getInstance().setNameRegister(nome);
+                        GetVariables.getInstance().setCargoRegister(spCargo.getSelectedItem().toString());
+                        GetVariables.getInstance().setLocalAgenciaRegister(spAgencia.getSelectedItem().toString());
 
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -93,14 +92,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void addItemsCargos() {
         List<String> list = new ArrayList<String>();
-        list.add("Gerente Regional");
         list.add("Gerente Agência");
+        list.add("Gerente Regional");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
+                R.layout.spinner_item, list);
 
         spCargo.setAdapter(dataAdapter);
-
     }
 
     public void listenerAgencia() {
@@ -109,14 +107,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void addItemsAgencias() {
         List<String> list = new ArrayList<String>();
-        list.add("Sicredi POC");
-        list.add("Sicredi Porto Alegre");
+        list.add("Agência POC");
+        list.add("Agência 2");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-
+                R.layout.spinner_item, list);
         spAgencia.setAdapter(dataAdapter);
-
     }
 
     public static void startActivity(Context from) {

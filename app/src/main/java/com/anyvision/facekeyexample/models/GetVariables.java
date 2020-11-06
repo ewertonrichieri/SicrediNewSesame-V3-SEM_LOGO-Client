@@ -16,9 +16,12 @@ public class GetVariables {
     private static String spTypeAccount;
     private static String nameAgencia;
     private Authentication auth;
+    private static String etRegisterName;
+    private static String etRegisterCargo;
+    private static String etRegisterLocalAgencia;
+    private static String txtLabelSliceClickChart;
+    private static String txtOpcaoFacilities;
 
-
-//mudei para private
     private GetVariables(){
         localServerUrl = "";
     }
@@ -29,6 +32,14 @@ public class GetVariables {
         }
 
         return getVariablesInstance;
+    }
+
+    public void SetTxtLabelSliceClickChart(String txtLabel){
+        txtLabelSliceClickChart = txtLabel;
+    }
+
+    public String GetTxtLabelSliceClickChart(){
+        return txtLabelSliceClickChart;
     }
 
     public void setServerUrl(String url){
@@ -63,6 +74,31 @@ public class GetVariables {
         GetVariables.etRegisterUsername = etRegisterUsername;
     }
 
+    //teste
+    public void setNameRegister(String nameRegister){
+        GetVariables.etRegisterName = nameRegister;
+    }
+
+    public String getNameRegister(){
+        return etRegisterName;
+    }
+
+    public void setCargoRegister(String cargoRegister){
+        GetVariables.etRegisterCargo = cargoRegister;
+    }
+
+    public String getCargoRegister(){
+        return etRegisterCargo;
+    }
+
+    public void setLocalAgenciaRegister(String agenciaLocalRegister){
+        GetVariables.etRegisterLocalAgencia = agenciaLocalRegister;
+    }
+
+    public String getLocalRegister(){
+        return etRegisterLocalAgencia;
+    }
+
     public String getSpTypeAccount() {
         return spTypeAccount;
     }
@@ -91,5 +127,11 @@ public class GetVariables {
 
     public void setNameAgencia(String nmAgencia){
         GetVariables.nameAgencia = nameAgencia;
+    }
+
+    public String getOpcaoFacilities() {return txtOpcaoFacilities; }
+
+    public void setTxtOpcaoFacilities(String opcaoFacilities) {
+        GetVariables.txtOpcaoFacilities = opcaoFacilities;
     }
 }

@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 7
-        versionName "1.5"
+        versionName "4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,11 +25,11 @@ android {
             applicationIdSuffix ".client"
             resValue "string", "app_name", "Facekey Client"
         }
-        sicredi {
-            dimension"default"
-            applicationIdSuffix ".sicredi"
-            resValue "string", "app_name", "Facekey Sicredi"
-        }
+//        sicredi {
+//            dimension"default"
+//            applicationIdSuffix ".sicredi"
+//            resValue "string", "app_name", "Facekey Sicredi"
+//        }
     }
 
     buildTypes {
@@ -41,15 +41,15 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            def project = "fk"
+            def project = "Facekey-Client"
             def SEP = "_"
 /*            if(variant.productFlavors[0].name) {
                 def flavor = variant.productFlavors[0].name
                 fk_app_001_ra
             }*/
             def buildType = variant.variantData.variantConfiguration.buildType.name
-            def version = variant.versionName
-            def versionForm = "ra"
+            def version = "V"+variant.versionName
+            def versionForm = "(logo-fortknox)"
             def date = new Date()
             def formattedDate = date.format('ddMMyy_HHmm')
 
@@ -96,7 +96,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-
     implementation(name:'sesame-4.0.2', ext:'aar')
     implementation(name:'api-5.1.1895', ext:'aar')
     implementation(name:'cameraview-2.4.0', ext:'aar')
@@ -108,6 +107,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-vision-common:19.1.0'
     implementation 'com.google.android.gms:play-services-vision-image-label:18.0.4'
     implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
+    implementation "io.reactivex.rxjava2:rxjava:2.2.6"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 }
 apply plugin: 'com.google.gms.google-services'

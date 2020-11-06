@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.anyvision.facekeyexample.R;
 import com.anyvision.facekeyexample.activities.LoginActivity;
 import com.anyvision.facekeyexample.firebase.Firebase;
@@ -18,6 +19,7 @@ import com.anyvision.facekeyexample.models.MessageTopic;
 import com.anyvision.facekeyexample.prysm.Authentication;
 import com.anyvision.facekeyexample.utils.Enum;
 import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLigarDesligarLuzes;
     private Button btnChamado;
     private Button btnPanico;
+    private Button btnPorta;
     private String typeAccount;
     private String nameAgencia;
-    private static String aprovaReprovaExtesao = "aprovaReprovaExtesao";
-    private static String chamadoDescriptionsButtons = "chamadoDescriptionsButtons";
     private static Activity finishMainActivity;
 
     @Override
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         typeAccount = GetVariables.getInstance().getSpTypeAccount();
 
-        if(typeAccount == null)
+        if (typeAccount == null)
             GetVariables.getInstance().setSpTypeAccount("AGENCIA");
 
         SharedPreferences sharedTypeAccount = getSharedPreferences("typeAccount", MODE_PRIVATE);
@@ -50,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
         editor.clear().commit();
         editor.putString("typeAccount", typeAccount);
         editor.apply();
-
-        Log.d("chamadoLista", aprovaReprovaExtesao + " " + chamadoDescriptionsButtons);
 
         nameAgencia = GetVariables.getInstance().getNameAgencia();
         finishMainActivity = this;
@@ -63,10 +62,11 @@ public class MainActivity extends AppCompatActivity {
         btnLigarDesligarLuzes = findViewById(R.id.btnLigarDesligar);
         btnChamado = findViewById(R.id.btnChamado);
         btnPanico = findViewById(R.id.btnPanico);
+        btnPorta = findViewById(R.id.btnPorta);
 
-        auth.requestToken(aprovaReprovaExtesao, chamadoDescriptionsButtons);
+        auth.requestToken(Enum.request.aprovaReprovaExtesao.toString(), Enum.request.chamadoDescriptionsButtons.toString());
 
-        if(nameAgencia == null)
+        if (nameAgencia == null)
             nameAgencia = "App.AGENCIA.POC.AGENCIA0001";
 
         FirebaseMessaging.getInstance().unsubscribeFromTopic("REGIONAL");
@@ -91,24 +91,30 @@ public class MainActivity extends AppCompatActivity {
         btnLigarDesligarLuzes.setText(listaDescriptions.get(3));
 
         btnChamado.setVisibility(View.VISIBLE);
-        btnChamado.setText(listaDescriptions.get(5));
+        btnChamado.setText(listaDescriptions.get(7));
 
         btnPanico.setVisibility(View.VISIBLE);
         btnPanico.setText(listaDescriptions.get(4));
 
+        btnPorta.setVisibility(View.VISIBLE);
+        btnPorta.setText(listaDescriptions.get(6));
+
         btnTimeExtend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
+                    String title = "Solicitação de Extensão de Alarme";
+                    String menssage = "Extensão de 60 minutos pela Agência ";
+                    String topic = "REGIONAL";
 
-                String title = "Solicitação de Extensão de Alarme";
-                String menssage = "Extensão de 60 minutos pela Agência ";
-                String topic = "REGIONAL";
+                    new MessageTopic(topic, title, menssage);
 
-                new MessageTopic(topic, title, menssage);
-
-                auth.requestToken(nameAgencia + ".2", "true");
+                    auth.requestToken(nameAgencia + ".2", "true");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -116,64 +122,91 @@ public class MainActivity extends AppCompatActivity {
         btnTimeExtend2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
+                try {
+                    Firebase.getInstance().sendNotification(true, GetVariables.getInstance().getEtUsername());
 
-                new MessageTopic(null, null, null);
-                auth.requestToken(nameAgencia + ".3", "true");
+                    new MessageTopic(null, null, null);
+                    auth.requestToken(nameAgencia + ".3", "true");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btnArmarAlarmes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                new MessageTopic(null, null, null);
-                auth.requestToken(nameAgencia + ".1", "true");
+                try {
+                    new MessageTopic(null, null, null);
+                    auth.requestToken(nameAgencia + ".1", "true");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btnLigarDesligarLuzes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                new MessageTopic(null, null, null);
-                auth.requestToken(nameAgencia + ".4", "true");
+                try {
+                    new MessageTopic(null, null, null);
+                    auth.requestToken(nameAgencia + ".4", "true");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
+        //GESTAO
         btnChamado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                ChamadoActivity.startActivity(MainActivity.this);
+                try {
+                    GestaoActivity.startActivity(MainActivity.this);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btnPanico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    String title = "Pânico Ativado";
+                    String menssage = "Botão de Panico Acionado";
+                    String topic = "REGIONAL";
 
-                String title = "Pânico Ativado";
-                String menssage = "Botão de Panico Acionado";
-                String topic = "REGIONAL";
+                    new MessageTopic(topic, title, menssage);
 
-                new MessageTopic(topic, title, menssage);
+                    auth.requestToken(nameAgencia + ".5", "true");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-                auth.requestToken(nameAgencia + ".5", "true");
+        btnPorta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    new MessageTopic(null, null, null);
+                    auth.requestToken(nameAgencia + ".7", "true");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
 
         LoginActivity.startActivity(MainActivity.this);
         finish();
     }
 
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
-        Log.d("destruindo", "Main activity");
-
     }
 
     public static void startActivity(Context from) {

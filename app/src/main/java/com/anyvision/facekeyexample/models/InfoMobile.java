@@ -3,6 +3,7 @@ package com.anyvision.facekeyexample.models;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.util.Log;
 
 import java.net.NetworkInterface;
@@ -34,6 +35,16 @@ public class InfoMobile {
             }
         } catch (Exception ex) {
             //handle exception
+        }
+        return "";
+    }
+
+    public static String getModeloMobile(){
+        try{
+            String modelo = Build.MANUFACTURER+" "+Build.MODEL;
+            return modelo;
+        }
+        catch (Exception e){
         }
         return "";
     }

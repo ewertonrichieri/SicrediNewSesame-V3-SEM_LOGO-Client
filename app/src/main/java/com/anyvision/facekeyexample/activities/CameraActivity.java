@@ -50,7 +50,8 @@ public class CameraActivity extends AppCompatActivity implements FragmentCommuni
             userId = InfoMobile.getMacAddress();
             Log.d("infoIdMac", InfoMobile.getMacAddress());
             AppData.setVideo(video);
-            serverUrl = "http://emea-sesame.anyvision.co:3003";
+//            serverUrl = "http://emea-sesame.anyvision.co:3003";
+            serverUrl = "http://200.188.213.130:3003";
             anvSurfaceType = AnvSurfaceType.DarkSurface;
 //            btnBack = findViewById(R.id.livenessBackBtn);
             imageFile = AppData.getIdImg();

@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +30,8 @@ import java.util.ArrayList;
 public class SolicitationHistoryReproved extends AppCompatActivity {
 
     private RecyclerView.Adapter adapter;
-    private Button btnVoltar;
-    private Button btnHome;
+    private ImageButton btnVoltar;
+    private ImageButton btnHistBackSolicit_Reproved;
     private Authentication auth;
     private ArrayList<String> listSolicitHistory;
     private ProgressBar progressBar;
@@ -39,19 +40,21 @@ public class SolicitationHistoryReproved extends AppCompatActivity {
     private static boolean enableProgressBarVisible = true;
     private static Activity finishSolicitationHistoryReproved;
     private static boolean active = false;
+    private TextView txtMenuAprovReprov;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitation_history);
-        btnVoltar = findViewById(R.id.btnHistBackSolicit);
-        btnHome = findViewById(R.id.btnHistBackHomeLogin);
+        btnVoltar = findViewById(R.id.btnHistBackSolicit_Reproved);
         progressBar = findViewById(R.id.progressBarHistory);
         progressBar.setVisibility(View.GONE);
-
+        txtMenuAprovReprov = findViewById(R.id.txtMenuAprovReprov);
+        txtMenuAprovReprov.setText(getString(R.string.REPROVADO));
+        btnHistBackSolicit_Reproved = findViewById(R.id.btnHistBackSolicit);
+        btnHistBackSolicit_Reproved.setVisibility(View.GONE);
         AllowGetlistSolicitHist = true;
         finishSolicitationHistoryReproved = this;
-
         auth = new Authentication(GetVariables.getInstance().getServerUrl());
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerViewHistorySolicitation);
@@ -123,12 +126,6 @@ public class SolicitationHistoryReproved extends AppCompatActivity {
                                         }
                                     }
                                     progressBar.setVisibility(View.GONE);
-//                                    if(listSolicitHistory.size() == 0){
-//                                        txtSolicitReprovada.setVisibility(View.VISIBLE);
-//                                    }
-//                                    else{
-//                                        txtSolicitReprovada.setVisibility(View.GONE);
-//                                    }
                                 }
                             }
                         });
@@ -148,32 +145,12 @@ public class SolicitationHistoryReproved extends AppCompatActivity {
                 solicitationHistThread.interrupt();
             }
         });
-
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(SolicitationHistoryApproved.onActive())
-                SolicitationHistoryApproved.getInstance().finish();
-
-                if(SolicitationExtensionActivity.onActive())
-                SolicitationExtensionActivity.getInstance().finish();
-
-                LoginActivity.startActivity(SolicitationHistoryReproved.this);
-                GetVariables.getInstance().setSpTypeAccount("REGIONAL");
-                eraserSharedPreferences();
-
-                finish();
-
-            }
-        });
     }
 
     //Habilita a Thread
     public static void setAllowGetlistSolicitHist() {
         AllowGetlistSolicitHist = true;
         enableProgressBarVisible = false;
-        Log.d("threadSolicitation", "key = true");
     }
 
     public void eraserSharedPreferences() {
@@ -186,26 +163,21 @@ public class SolicitationHistoryReproved extends AppCompatActivity {
         super.onResume();
         auth.requestToken("aprovaReprovaExtesao", "solicitationExtension");
         active = true;
-        Log.d("solicitationThread", "History_onResume");
     }
 
     public void onPause(){
         super.onPause();
-        Log.d("solicitationThread", "History_onPause");
     }
 
     public void onStop(){
         super.onStop();
         solicitationHistThread.interrupt();
-        Log.d("solicitationThread", "History_onStop");
     }
 
     //teste
     public void onDestroy(){
         active = false;
         super.onDestroy();
-        Log.d("destruindo", "SolicitationReproved");
-
     }
 
     public static void startActivity(Context from) {

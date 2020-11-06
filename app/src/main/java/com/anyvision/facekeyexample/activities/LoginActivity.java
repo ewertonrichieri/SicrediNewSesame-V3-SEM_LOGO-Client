@@ -37,6 +37,10 @@ import com.anyvision.sesame.Sesame;
 import com.google.firebase.messaging.FirebaseMessaging;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class LoginActivity extends BaseActivity {
 
@@ -73,7 +77,7 @@ public class LoginActivity extends BaseActivity {
         }
     };
 
-    @TargetApi(Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +90,29 @@ public class LoginActivity extends BaseActivity {
         serverLocalUrl = findViewById(R.id.serverLocalUrl);
         anyvisionUrl = findViewById(R.id.anyvisionUrl);
         etUsername = findViewById(R.id.username);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.alert_dialog, null);
+        final EditText input = (EditText) view.findViewById(R.id.txtsenha);
+        alertDialogBuilder.setView(view);
+
+        alertDialogBuilder.setPositiveButton("ENTER", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String senha = input.getText().toString();
+                if (senha.equals(getString(R.string.password))) {
+                    SettingsActivity.startActivity(LoginActivity.this);
+                }
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("SAIR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        final AlertDialog alertDialog = alertDialogBuilder.create();
 
         SharedPreferences sharedEnableBtn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (sharedEnableBtn.getBoolean(getString(R.string.enableBtnRegister), false)) {
@@ -129,9 +156,9 @@ public class LoginActivity extends BaseActivity {
         GetVariables.getInstance().setEtLocalServerUrl(serverLocalUrl);
         GetVariables.getInstance().setTextviewAnyvision(anyvisionUrl);
 
-        if (GetVariables.getInstance().getSpTypeAccount() == null) {
-            Firebase.getTypeFirebase();
-        }
+        GetUrlTipoAgenciaRegional();
+        GetUrlServidorLocalAlterada();
+        GetUrlAnyvisionAlterada();
 
         if (GetVariables.getInstance().getSpTypeAccount() == getString(R.string.REGIONAL)) {
             try {
@@ -144,21 +171,8 @@ public class LoginActivity extends BaseActivity {
             }
         }
 
-        if (GetVariables.getInstance().getSpTypeAccount() == getString(R.string.AGENCIA)) {
-            FirebaseMessaging.getInstance().subscribeToTopic(getString(R.string.AGENCIA));
-        }
-
-        if (GetVariables.getInstance().getServerUrl() == null) {
-            GetVariables.getInstance().setServerUrl(serverLocalUrl.getText().toString());
-        }
-
-        if (GetVariables.getInstance().getEtAnyvisionUrl() == null) {
-            GetVariables.getInstance().setEtAnyvisionUrl(anyvisionUrl.getText().toString());
-        }
-
         GetVariables.getInstance().setServerUrl(serverLocalUrl.getText().toString());
         GetVariables.getInstance().setEtAnyvisionUrl(anyvisionUrl.getText().toString());
-
         progressBar = findViewById(R.id.progress_bar);
         auth = new Authentication(GetVariables.getInstance().getServerUrl());
 
@@ -172,22 +186,11 @@ public class LoginActivity extends BaseActivity {
                     channelName, NotificationManager.IMPORTANCE_LOW));
         }
 
-        Log.d("auth", GetVariables.getInstance().getServerUrl());
-
-        SettingsComponent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SettingsActivity.startActivity(LoginActivity.this);
-            }
-        });
-
         btnPanico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 try {
                     auth.requestToken(getString(R.string.AGENCIA0001_5), String.valueOf(true));
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -197,7 +200,6 @@ public class LoginActivity extends BaseActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 progressBar.setVisibility(View.VISIBLE);
                 Sesame.initialize(anyvisionUrl.getText().toString(), 60000);
                 RegisterActivity.startActivity(LoginActivity.this);
@@ -211,18 +213,13 @@ public class LoginActivity extends BaseActivity {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
-
                 GetVariables.getInstance().setServerUrl(serverLocalUrl.getText().toString());
                 auth.verifyServerStatus();
-
                 try {
-
                     if (auth.getStatusServer()) {
                         if (etUsername.getText().toString().matches("")) {
                             Toast.makeText(LoginActivity.this, getString(R.string.digite_nome_usuario), Toast.LENGTH_LONG).show();
-
                         } else {
-
                             GetVariables.getInstance().setEtUsername(etUsername.getText().toString());
                             progressBar.setVisibility(View.VISIBLE);
                             Sesame.initialize(anyvisionUrl.getText().toString(), 60000);
@@ -233,12 +230,13 @@ public class LoginActivity extends BaseActivity {
                             }
 
                             if (typeAccount.equals(Enum.AgReg.AGENCIA.toString())) {
-                                auth.requestToken(Enum.requestNames.aprovaReprovaExtesao.toString(), Enum.requestNames.descriptions.toString());
+                                auth.requestToken(Enum.request.aprovaReprovaExtesao.toString(), Enum.request.descriptions.toString());
                             }
 
                             LoginCameraActivity.startActivity(LoginActivity.this);
                         }
-                    } else {
+                    }
+                    else {
                         Toast.makeText(LoginActivity.this, getString(R.string.verifique_status_servidor), Toast.LENGTH_LONG).show();
                     }
 
@@ -252,18 +250,15 @@ public class LoginActivity extends BaseActivity {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View view) {
-
                 try {
-                    Log.d("countTimerTeste", String.valueOf(countClick));
-
                     countClick++;
                     mCountDownTimer.cancel();
                     mCountDownTimer.start();
 
                     if (countClick >= 7) {
-                        SettingsActivity.startActivity(view.getContext());
+                        input.getText().clear();
+                        alertDialog.show();
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -392,5 +387,56 @@ public class LoginActivity extends BaseActivity {
             e.printStackTrace();
         }
         return "";
+    }
+
+    private void GetUrlAnyvisionAlterada() {
+        try {
+            SharedPreferences shUrlAnyvision = getSharedPreferences(Enum.SharedPrivate.URL_ANYVISION.toString(), MODE_PRIVATE);
+            String urlAnyvision = shUrlAnyvision.getString(Enum.SharedPrivate.URL_ANYVISION.toString(), null);
+
+            if (urlAnyvision != null) {
+                GetVariables.getInstance().setEtAnyvisionUrl(urlAnyvision);
+                anyvisionUrl.setText(urlAnyvision);
+            }
+            else {
+                GetVariables.getInstance().setEtAnyvisionUrl(anyvisionUrl.getText().toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void GetUrlServidorLocalAlterada() {
+        try {
+            SharedPreferences shUrlServidorLocal = getSharedPreferences(Enum.SharedPrivate.URL_SERVIDOR_LOCAL.toString(), MODE_PRIVATE);
+            String urlServidorLocal = shUrlServidorLocal.getString(Enum.SharedPrivate.URL_SERVIDOR_LOCAL.toString(), null);
+
+            if (urlServidorLocal != null) {
+                GetVariables.getInstance().setServerUrl(urlServidorLocal);
+                serverLocalUrl.setText(urlServidorLocal);
+            } else {
+                GetVariables.getInstance().setServerUrl(serverLocalUrl.getText().toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void GetUrlTipoAgenciaRegional() {
+        try {
+            SharedPreferences shTipoAgenciaRegional = getSharedPreferences(Enum.SharedPrivate.TIPO_AGENCIA_REGIONAL.toString(), MODE_PRIVATE);
+            String tipoAgenciaReginoal = shTipoAgenciaRegional.getString(Enum.SharedPrivate.TIPO_AGENCIA_REGIONAL.toString(), null);
+
+            if (tipoAgenciaReginoal != null) {
+                GetVariables.getInstance().setSpTypeAccount(tipoAgenciaReginoal);
+            }
+
+            if (GetVariables.getInstance().getSpTypeAccount() == null) {
+                Firebase.getTypeFirebase();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

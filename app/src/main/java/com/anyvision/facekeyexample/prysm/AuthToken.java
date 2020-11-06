@@ -1,10 +1,18 @@
 package com.anyvision.facekeyexample.prysm;
 
+import com.anyvision.facekeyexample.models.ChamadoGrafico;
+import com.anyvision.facekeyexample.models.Facilities;
+import com.anyvision.facekeyexample.models.GetGroups.Groups;
 import com.anyvision.facekeyexample.models.SolicitationExtension;
 import com.anyvision.facekeyexample.models.VariableRow;
 import com.anyvision.facekeyexample.models.VariableRowChamado;
+
+import java.util.List;
+import io.reactivex.Observable;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -48,5 +56,17 @@ public interface AuthToken {
     @Headers({"Accept: application/xml"})
     @GET("AppVisionService.svc/GetVariableStatesByFilter?filters=$V.App.REGIONAL.POC.*")
     Call<SolicitationExtension> GetSolicitHistApprovedReproved(@Header("SessionID") String SessionID);
+
+    @Headers({"Accept: application/xml"})
+    @GET("AppVisionService.svc/GetVariablesByFilter?filters=$V.App.AGENCIA.POC.AGENCIA0001.Facilities*,Type=Enum")
+    Call<Facilities> GetFacilities(@Header("SessionID") String SessionID);
+
+    @Headers({"Accept: application/xml"})
+    @GET("AppVisionService.svc/GetVariableStatesByFilter?filters=$V.Gestao.Graficos.Chamados*")
+    Call<ChamadoGrafico> GetGestaoControleSalas(@Header("SessionID") String SessionId);
+
+//    @Headers({"Accept: application/xml"})
+//    @GET("AppVisionService.svc/SetVariable?changeOnly=false&severity=-1&quality=-1")
+//    Observable<Void> setMultipleVariable(@Header("SessionID") String SessionId, @Query("name") String name, @Query("newValue") String newValue);
 
 }

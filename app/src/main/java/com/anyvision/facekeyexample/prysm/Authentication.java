@@ -22,11 +22,14 @@ import com.anyvision.facekeyexample.FacekeyApplication;
 import com.anyvision.facekeyexample.activities.logged.SolicitationExtensionActivity;
 import com.anyvision.facekeyexample.activities.logged.SolicitationHistoryApproved;
 import com.anyvision.facekeyexample.activities.logged.SolicitationHistoryReproved;
+import com.anyvision.facekeyexample.models.ChamadoGrafico;
+import com.anyvision.facekeyexample.models.Facilities;
 import com.anyvision.facekeyexample.models.GetVariables;
 import com.anyvision.facekeyexample.models.MessageTopic;
 import com.anyvision.facekeyexample.models.SolicitationExtension;
 import com.anyvision.facekeyexample.models.VariableRow;
 import com.anyvision.facekeyexample.models.VariableRowChamado;
+import com.anyvision.facekeyexample.utils.Enum;
 
 import org.json.JSONObject;
 
@@ -69,7 +72,6 @@ public class Authentication extends Application {
 
     public void requestToken(final String name, final String newValue) {
 
-        Log.d("name ", name + "" + newValue);
         final String AccountType = GetVariables.getInstance().getSpTypeAccount();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(serverLocalUrl)
@@ -86,14 +88,8 @@ public class Authentication extends Application {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 try {
-
                     token = cleanOUTPUT(response.body().string());
-                    Log.d("auth", "SessionID: " + token);
                     hashpassword = md5(token + md5(AccountType + AccountType));
-
-                    Log.d("usuarioHash", serverLocalUrl);
-                    Log.d("usuarioHash", hashpassword);
-
                     if (response.isSuccessful()) {
 
                         if (getContext() == null) {
@@ -154,16 +150,11 @@ public class Authentication extends Application {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("auth", response.toString());
                 if (response.isSuccessful()) {
-                    Log.d("auth", "Passou in getAuthentication");
-                    Log.d("auth", String.valueOf(response.code()));
-                    Log.d("auth", response.toString());
-
                     setVariable(SessionId, name, newValue);
+
                 } else {
-                    Log.d("ErroConexao", "FECHOU E ABRIU DENOVO in getAuthentication");
-                    Log.d("ErroConexao", String.valueOf(response.code()));
-                    Log.d("ErroConexao", response.toString());
                     if (response.code() == 402)
                         showToast(response.code());
 
@@ -190,17 +181,14 @@ public class Authentication extends Application {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.d("chamado", "acho q setou agora a variavel");
+                Log.d("chamado", response.toString());
 
                 showToast(response.code());
                 if (response.isSuccessful()) {
-                    Log.d("chamado", "SETOU SIM");
-
                     if (MessageTopic.getMessage() != null && MessageTopic.getTitle() != null && MessageTopic.getTitle() != null)
                         iniciarNotificacao(MessageTopic.getTopic(), MessageTopic.getTitle(), MessageTopic.getMessage());
 
                     if (name.contains(".Reprogramacao") && SolicitationExtensionActivity.onActive()) {
-
                         GetVariableStateSolicitHistory(SessionId);
                     } else {
                         closeSession(SessionId);
@@ -298,6 +286,9 @@ public class Authentication extends Application {
                 if (response.isSuccessful()) {
                     VariableRow desc = response.body();
 
+                    GetDescricaoBtnFacilities(SessionID);
+                    //closeSession(SessionID);
+
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.clear().commit();
@@ -314,7 +305,6 @@ public class Authentication extends Application {
                     Log.d("auth", response.message());
                     assert response.body() != null;
                     Log.d("auth", response.body().toString());
-                    closeSession(SessionID);
 
                 } else {
                     assert response.errorBody() != null;
@@ -467,7 +457,6 @@ public class Authentication extends Application {
     //GetGeral so na primeira vez
     public void GetVariableSolicitationExtensionGeral(final String SessionID) {
 
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(serverLocalUrl)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
@@ -483,10 +472,7 @@ public class Authentication extends Application {
 
                 if (response.isSuccessful()) {
                     SolicitationExtension solicitation = response.body();
-                    Log.d("array3", "OK solicitação extensao 1 ");
-
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.clear().commit();
 
@@ -515,7 +501,7 @@ public class Authentication extends Application {
     }
 
     public void GetVariableDescripBtnChamado(final String SessionID) {
-        Log.d("chamadoLista", "GetVariableDescripBtnChamado");
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(serverLocalUrl)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
@@ -547,8 +533,6 @@ public class Authentication extends Application {
                     }
 
                     editor.apply();
-
-                    closeSession(SessionID);
 
                 } else {
                     assert response.errorBody() != null;
@@ -688,13 +672,9 @@ public class Authentication extends Application {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Log.d("auth", "close session sucess");
                     Log.d("auth", String.valueOf(response.code()));
-                    Log.d("auth", response.toString());
                 } else {
-                    Log.d("auth", "close session failed");
                     Log.d("auth", String.valueOf(response.code()));
-                    Log.d("auth", response.toString());
                 }
             }
 
@@ -705,6 +685,246 @@ public class Authentication extends Application {
             }
         });
     }
+
+    public void requestTokenGestao(final String name, final String newValue, final String activity) {
+
+        final String AccountType = GetVariables.getInstance().getSpTypeAccount();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        final AuthToken tokenAuth = retrofit.create(AuthToken.class);
+        Call<ResponseBody> call = tokenAuth.getToken();
+
+        call.enqueue(new Callback<ResponseBody>() {
+            private String token;
+            private String hashpassword;
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                try {
+                    token = cleanOUTPUT(response.body().string());
+                    hashpassword = md5(token + md5(AccountType + AccountType));
+                    if (response.isSuccessful()) {
+                        if (getContext() == null) {
+                            mContext = FacekeyApplication.getAppContext();
+                        }
+
+                        if (activity.equals("FacilitiesControleActivity")) {
+                            getAuthentication(token, hashpassword, name, newValue);
+                        }
+
+                        GetChamadoControleSalaGrafico(token);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("ErroConexao", t.getMessage());
+            }
+        });
+    }
+
+    public void GetDescricaoBtnFacilities(final String SessionID) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .build();
+        AuthToken authToken = retrofit.create(AuthToken.class);
+
+        Call<Facilities> call = authToken.GetFacilities(SessionID);
+
+        call.enqueue(new Callback<Facilities>() {
+            @Override
+            public void onResponse(Call<Facilities> call, Response<Facilities> response) {
+                try {
+                    if (response.isSuccessful()) {
+                        Facilities facilities = response.body();
+
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        GetChamadoControleSalaGrafico(SessionID);
+
+                        ArrayList<String> listaDescricaoBtnFacilities = facilities.GetDescricaoBtnFacilities();
+
+                        editor.putInt("facilitiesDescricaoBtn_size", listaDescricaoBtnFacilities.size());
+                        for (int i = 0; i < facilities.GetDescricaoBtnFacilities().size(); i++) {
+                            editor.putString("facilitiesDescricaoBtn" + "_" + i, listaDescricaoBtnFacilities.get(i));
+                        }
+                        editor.apply();
+                    } else {
+                        closeSession(SessionID);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Facilities> call, Throwable t) {
+                Log.d("auth", t.getMessage());
+            }
+        });
+    }
+
+    public void GetChamadoControleSalaGrafico(final String SessionID) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .build();
+        AuthToken tokenAuth = retrofit.create(AuthToken.class);
+
+        Call<ChamadoGrafico> call = tokenAuth.GetGestaoControleSalas(SessionID);
+
+        call.enqueue(new Callback<ChamadoGrafico>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<ChamadoGrafico> call, Response<ChamadoGrafico> response) {
+                Log.d("e", response.toString());
+                if (response.isSuccessful()) {
+
+                    ChamadoGrafico liGestaoCtrSala = response.body();
+
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    ArrayList<String> listaDescriptions = liGestaoCtrSala.GetListaGestaoControleSala();
+                    int valorTotal = liGestaoCtrSala.GetPorcentagemTotalGestaoControleSala();
+
+                    editor.putInt(Enum.SharedPrivate.CHAMADO_GESTAO_VALOR_TOTAL.toString(), valorTotal);
+                    editor.putInt(Enum.SharedPrivate.CHAMADO_GESTAO_CONTROLE_SALA_SIZE.toString(), listaDescriptions.size());
+                    for (int i = 0; i < liGestaoCtrSala.GetListaGestaoControleSala().size(); i++) {
+                        editor.putString(Enum.SharedPrivate.GRAFICO_CHAMADO.toString() + "_" + i, listaDescriptions.get(i).replace("Gestao.Graficos.Chamados.", ""));
+                    }
+                    //teste
+
+                    editor.apply();
+                    closeSession(SessionID);
+                    //GetChamadoControleSalaGrafico(SessionID);
+
+                } else {
+                    assert response.errorBody() != null;
+                    closeSession(SessionID);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ChamadoGrafico> call1, Throwable t) {
+                Log.d("auth", t.getMessage());
+            }
+        });
+    }
+
+    public void requestTokenFacilities(final ArrayList<String> lista) {
+        final String AccountType = GetVariables.getInstance().getSpTypeAccount();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        final AuthToken tokenAuth = retrofit.create(AuthToken.class);
+        Call<ResponseBody> call = tokenAuth.getToken();
+
+        call.enqueue(new Callback<ResponseBody>() {
+            private String token;
+            private String hashpassword;
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                try {
+                    token = cleanOUTPUT(response.body().string());
+                    hashpassword = md5(token + md5(AccountType + AccountType));
+                    if (response.isSuccessful()) {
+                        if (getContext() == null) {
+                            mContext = FacekeyApplication.getAppContext();
+                        }
+                        getAuthenticationFacilities(token, hashpassword, lista);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    closeSession(token);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("ErroConexao", t.getMessage());
+            }
+        });
+    }
+
+    private void getAuthenticationFacilities(final String SessionId, String pass, final ArrayList<String> lista) {
+
+        final String AccountType = GetVariables.getInstance().getSpTypeAccount();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+        AuthToken tokenAuth = retrofit.create(AuthToken.class);
+
+        Call<Void> call = tokenAuth.signIn(SessionId, AccountType, pass);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    for (String li : lista) {
+                        String[] valores = li.split(";");
+                        String name = valores[0];
+                        String newValue = valores[1];
+
+                        setVariableFacilities(SessionId, name, newValue);
+                    }
+                    closeSession(SessionId);
+                } else {
+                    if (response.code() == 402)
+                        showToast(response.code());
+                    closeSession(SessionId);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("er", t.getMessage());
+            }
+        });
+    }
+
+    private void setVariableFacilities(final String SessionId, final String name, final String newValue) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverLocalUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+        AuthToken tokenAuth = retrofit.create(AuthToken.class);
+
+        Call<Void> call = tokenAuth.setVariable(SessionId, name, newValue);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("teste", response.toString());
+
+                showToast(response.code());
+                if (response.isSuccessful()) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+                Log.d("ErroConexao", t.getMessage());
+                closeSession(SessionId);
+            }
+        });
+    }
+
 
     public static Context getContext() {
         return mContext;

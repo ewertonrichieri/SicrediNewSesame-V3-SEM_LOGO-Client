@@ -183,38 +183,22 @@ public class Notification extends FirebaseMessagingService {
     //somente a primeira vez que esse metodo é chamado
     @Override
     public void onNewToken(String token) {
-        Log.d("jonejaf_token", token);
-        Log.d("jonejaf_token", InfoMobile.getMacAddress());
         String mac = InfoMobile.getMacAddress().replace(":", "");
-        Log.d("jonejaf_token", mac);
-
         FirebaseMessaging.getInstance().subscribeToTopic("%" + mac);
-        Firebase.unRegister(mac, "Não Registrado");
-        Log.d("jonejaf_token", mac);
-
+        Firebase.unRegister(mac, false);
         super.onNewToken(token);
     }
 
     public static void RescueToken() {
         final String autorizacao = "1071532943381";
         final String firebase = "FCM";
-
-        Log.d("jonejaf_token", "token");
-
-
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-
                     FirebaseInstanceId.getInstance().deleteInstanceId(); // remove token
-
                     String token = FirebaseInstanceId.getInstance().getToken(autorizacao, firebase);
-
-                    Log.d("Token_teste", token);
-
                 } catch (IOException e) {
-
                 }
             }
         }).start();

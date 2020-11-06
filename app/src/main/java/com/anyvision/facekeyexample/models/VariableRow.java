@@ -52,39 +52,43 @@ public class VariableRow {
     @Path("VariableRow[11]")
     private String description11;
 
-    public String getDescription1(){
-        return  description1;
-    }
-    public String getDescription2(){
-        return  description2;
-    }
-    public String getDescription3(){
-        return  description3;
-    }
-    public String getDescription4(){
-        return  description4;
-    }
-    public String getDescription5(){
-        return  description5;
-    }
-    public String getDescription6(){
-        return  description6;
-    }
-    public String getDescription7(){
-        return  description7;
-    }
-    public String getDescription8(){
-        return  description8;
-    }
-    public String getDescription9(){
-        return  description9;
-    }
-    public String getDescription10(){
-        return  description10;
-    }
-    public String getDescription11(){
-        return  description11;
-    }
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[12]")
+    private String description12;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[13]")
+    private String description13;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[14]")
+    private String description14;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[15]")
+    private String description15;
+
+
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[16]")
+    private String description16;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[17]")
+    private String description17;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[18]")
+    private String description18;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[19]")
+    private String description19;
+
+    @Element(name = "Description", required = false)
+    @Path("VariableRow[20]")
+    private String description20;
 
     public ArrayList<String> getListaDescription(){
         ArrayList<String> listaDescriptions = new ArrayList<String>();
@@ -94,6 +98,10 @@ public class VariableRow {
         listaDescriptions.add(description5);
         listaDescriptions.add(description6);
         listaDescriptions.add(description7);
+        listaDescriptions.add(description15);
+        listaDescriptions.add(description17);
+        //listaDescriptions.add(description16);
+
 
         return listaDescriptions;
     }

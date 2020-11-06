@@ -2,6 +2,8 @@ package com.anyvision.facekeyexample.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.transition.Slide;
 import android.util.Log;
@@ -9,12 +11,16 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentManager;
 import com.anyvision.facekeyexample.R;
 import com.anyvision.facekeyexample.firebase.Firebase;
+import com.anyvision.facekeyexample.firebase.StringsFirebase;
 import com.anyvision.facekeyexample.models.AppData;
 import com.anyvision.facekeyexample.models.GetVariables;
 import com.anyvision.facekeyexample.models.InfoMobile;
+import com.anyvision.facekeyexample.utils.Enum;
 import com.anyvision.sesame.Sesame;
 import com.anyvision.sesame.listeners.FragmentCommunicatior;
 import com.anyvision.sesame.listeners.IRegisterListener;
@@ -37,7 +43,6 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
     private TextView backMenu;
     private int faceNaoIdentificadaDocumento = 400;
     public static String VIDEO_MP_4;
-    //    public static String VIDEO_MP_4 = "/SesameVideo.mp4";
     public static final int SERVER_TIMEOUT = 60000;
     public static final int ENTER_ANIMATION_DURATION = 200;
     private File video;
@@ -45,7 +50,9 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
     private FragmentManager fragmentManager;
     private Slide enterAnimation;
     private AnvSurfaceType anvSurfaceType;
+    private int usuarioJaCadastrado = 409;
     private TextView anyvisionUrl;
+    private static StringsFirebase str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,24 +67,17 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
         tryAgain = findViewById(R.id.try_again);
         backMenu = findViewById(R.id.menu);
         VIDEO_MP_4 = getString(R.string.sesameVideoMp4);
-
-        if(GetVariables.getInstance().getTextviewAnyvision().getText().toString() == null)
-        GetVariables.getInstance().setEtAnyvisionUrl(getString(R.string.server_anyvision));
-
-        serverUrl = GetVariables.getInstance().getEtAnyvisionUrl();
-
         fragmentManager = getSupportFragmentManager();
         enterAnimation = new Slide(Gravity.BOTTOM);
         enterAnimation.setDuration(ENTER_ANIMATION_DURATION);
         video = new File(getExternalFilesDir(null) + VIDEO_MP_4);
-        Log.d("infoIdMac", InfoMobile.getMacAddress());
-        AppData.setVideo(video);
 
-        if (GetVariables.getInstance().getEtAnyvisionUrl() == null) {
-            GetVariables.getInstance().setEtAnyvisionUrl(anyvisionUrl.getText().toString());
-        }
+        serverUrl = GetVariables.getInstance().getEtAnyvisionUrl();
+        if(serverUrl == null)
+            serverUrl = getString(R.string.servidorSesame);
 
         anvSurfaceType = AnvSurfaceType.DarkSurface;
+        AppData.setVideo(video);
         View tryAgain = findViewById(R.id.try_again);
 
         tryAgain.setOnClickListener(new View.OnClickListener() {
@@ -92,11 +92,9 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
         backMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 RegisterActivity.getInstance().finish();
                 InstructionsActivity.getInstance().finish();
                 LoginActivity.startActivity(ResultActivity.this);
-
                 finish();
             }
         });
@@ -108,43 +106,53 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
         tryAgainContainer.setVisibility(View.GONE);
         horizontalSeparator.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
-
         String userId = InfoMobile.getMacAddress() + "/" + GetVariables.getInstance().getEtRegisterUsername();
-
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         startLivenessResults(AppData.getIdImg(), AppData.getVideo(), userId);
     }
 
     private void startLivenessResults(File imageFile, File videoFile, String userId) {
-
         Sesame.initialize(serverUrl, SERVER_TIMEOUT);
         registerToSesame(imageFile, videoFile, userId);
     }
 
     private void registerToSesame(File imageFile, File videoFile, String userId) {
-
         Sesame.registerUser(imageFile, videoFile, userId, new IRegisterListener() {
-
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSuccess() {
 
+                final String userNameRegister = GetVariables.getInstance().getEtRegisterUsername();
+                final String nameRegister = GetVariables.getInstance().getNameRegister();
+                final String cargoRegister = GetVariables.getInstance().getCargoRegister();
+                final String tipoAgencia = GetVariables.getInstance().getLocalRegister();
+
+                if(cargoRegister.contains("Regional")){
+                    SetTipoAgenciaRegionalSharedPrivate("REGIONAL");
+                }
+                else{
+                    SetTipoAgenciaRegionalSharedPrivate("AGENCIA");
+                }
+                Firebase.getInstance().createUser(userNameRegister,
+                        nameRegister,
+                        cargoRegister,
+                        tipoAgencia);
+
                 String mac = InfoMobile.getMacAddress();
-                Firebase.unRegister(mac, getString(R.string.registrado));
-                Log.d("FirebaseDeuCerto", "Sucess e firebase");
+                Firebase.unRegister(mac.replace(str.caracterDoisPontos, ""), true);
                 onResult(true, getString(R.string.result_success));
             }
 
             @Override
             public void onFailure(int errorCode) {
-                Log.d("testeSimnao", String.valueOf(errorCode));
-
                 if (errorCode == faceNaoIdentificadaDocumento) {
                     onResult(false, getString(R.string.faceNaoIdentificadaNoDocumento));
+                } else if (errorCode == usuarioJaCadastrado) {
+                    onResult(false, getString(R.string.usuarioJaCadastrado));
                 } else {
                     onResult(false, getString(R.string.falhaNaVerificacao));
                 }
@@ -171,7 +179,6 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
             backMenu.setVisibility(View.GONE);
         }
         File videoAndImageDir = AppData.getVideo().getParentFile();
-
         videoAndImageDir.delete();
     }
 
@@ -190,12 +197,23 @@ public class ResultActivity extends BaseActivity implements FragmentCommunicatio
 
     @Override
     public void switchFragments(eFragmentChooser eFragmentChooser) {
-
     }
 
     @Override
     public void goBackFromFragment() {
+    }
 
+    private void  SetTipoAgenciaRegionalSharedPrivate(String tipo){
+        try {
+            SharedPreferences shTipoAgenciaRegional = getSharedPreferences(Enum.SharedPrivate.TIPO_AGENCIA_REGIONAL.toString(), MODE_PRIVATE);
+            SharedPreferences.Editor editTipoAgReg = shTipoAgenciaRegional.edit();
+            editTipoAgReg.clear().commit();
+            editTipoAgReg.putString(Enum.SharedPrivate.TIPO_AGENCIA_REGIONAL.toString(), tipo);
+            editTipoAgReg.commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
 

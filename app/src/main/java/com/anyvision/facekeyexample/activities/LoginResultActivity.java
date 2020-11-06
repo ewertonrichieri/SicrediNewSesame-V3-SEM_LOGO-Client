@@ -50,6 +50,7 @@ public class LoginResultActivity extends BaseActivity implements FragmentCommuni
     private FragmentManager fragmentManager;
     private Slide enterAnimation;
     private AnvSurfaceType anvSurfaceType;
+    private static String etUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +67,12 @@ public class LoginResultActivity extends BaseActivity implements FragmentCommuni
         enterAnimation.setDuration(ENTER_ANIMATION_DURATION);
         video = new File(getExternalFilesDir(null) + VIDEO_MP_4);
         AppData.setVideo(video);
-
-        if(GetVariables.getInstance().getTextviewAnyvision().getText().toString() == null)
-            GetVariables.getInstance().setEtAnyvisionUrl(getString(R.string.server_anyvision));
+        etUsername = GetVariables.getInstance().getEtUsername();
 
         serverUrl = GetVariables.getInstance().getEtAnyvisionUrl();
+        if(serverUrl == null)
+            serverUrl = getString(R.string.servidorSesame);
+
         anvSurfaceType = AnvSurfaceType.DarkSurface;
 
         authenticate();
@@ -95,7 +97,6 @@ public class LoginResultActivity extends BaseActivity implements FragmentCommuni
         progressBar.setVisibility(View.VISIBLE);
 
         String userId = InfoMobile.getMacAddress() + "/" + GetVariables.getInstance().getEtUsername();
-        Log.d("debug", userId);
 
         try {
             Thread.sleep(500);
@@ -107,34 +108,26 @@ public class LoginResultActivity extends BaseActivity implements FragmentCommuni
     }
 
         private void authenticateWithSesame(File video, String userId){
-
             Sesame.initialize(serverUrl, SERVER_TIMEOUT);
-
             Sesame.authenticateUser(video, userId, new IAuthenticateListener() {
 
                 @Override
                 public void onSuccess() {
-
                     if (typeAccount.equals("REGIONAL")) {
                         FirebaseMessaging.getInstance().unsubscribeFromTopic("AGENCIA");
                         FirebaseMessaging.getInstance().subscribeToTopic("REGIONAL");
 
-                        GetVariables.getInstance().setSpTypeAccount("AGENCIA");
                         auth.requestToken("aprovaReprovaExtesao", "geral");
                         SolicitationExtensionActivity.startActivity(LoginResultActivity.this);
                     } else {
                         MainActivity.startActivity(LoginResultActivity.this);
                     }
                     finish();
-
-                    Log.d("testeSimnao", "fcertgo");
                 }
 
                 @Override
                 public void onFailure(int errorCode) {
-                    onResult(false, "Usuário não identificado! Por favor realize o cadastro ou se já for cadastrado tente novamente");
-                    Log.d("testeSimnao", "falhou");
-
+                    onResult(false, "Usuário " +etUsername+ " não identificado! Por favor tente novamente");
                 }
             });
         }

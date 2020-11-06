@@ -151,11 +151,14 @@ public class FacilitiesControleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    if ((edittxtData.getText().toString().isEmpty()) || (editTxtqtdHoras.getText().toString().isEmpty())
-                            || (edtTxtQtdProfissionais.getText().toString().isEmpty())) {
-                        Toast.makeText(FacilitiesControleActivity.this, "Por favor preencha todos os campos!", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+                    auth.verifyServerStatus();
+                    if(auth.getStatusServer()){
+
+                        if ((edittxtData.getText().toString().isEmpty()) || (editTxtqtdHoras.getText().toString().isEmpty())
+                                || (edtTxtQtdProfissionais.getText().toString().isEmpty())) {
+                            Toast.makeText(FacilitiesControleActivity.this, "Por favor preencha todos os campos!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         String regex = "[0-9]+";
                         Boolean validaValor = edtTxtQtdProfissionais.getText().toString().matches(regex);
@@ -182,6 +185,10 @@ public class FacilitiesControleActivity extends AppCompatActivity {
                         li.add(pathRequest + numero_request + ";" + edtTxtQtdProfissionais.getText().toString());
 
                         auth.requestTokenFacilities(li);
+                    }
+                    else{
+                     Toast.makeText(FacilitiesControleActivity.this, getString(R.string.verifique_status_servidor), Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

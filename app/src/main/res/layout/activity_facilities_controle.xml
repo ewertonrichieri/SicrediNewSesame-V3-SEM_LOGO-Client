@@ -27,7 +27,7 @@
         android:text="Solicitação de Serviço"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:textColor="#000000"
+        android:textColor="#3C6684"
         app:layout_constraintTop_toBottomOf="@id/sicredi"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,6 +110,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         android:background="#F0F0F0"
         />
 

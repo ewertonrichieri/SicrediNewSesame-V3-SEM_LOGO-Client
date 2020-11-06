@@ -2,7 +2,6 @@ package com.anyvision.facekeyexample.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -24,10 +23,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+
 import com.anyvision.facekeyexample.R;
-import com.anyvision.facekeyexample.activities.logged.SolicitationExtensionActivity;
 import com.anyvision.facekeyexample.firebase.Firebase;
 import com.anyvision.facekeyexample.models.GetVariables;
 import com.anyvision.facekeyexample.models.InfoMobile;
@@ -35,12 +35,9 @@ import com.anyvision.facekeyexample.prysm.Authentication;
 import com.anyvision.facekeyexample.utils.Enum;
 import com.anyvision.sesame.Sesame;
 import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class LoginActivity extends BaseActivity {
 
@@ -235,8 +232,7 @@ public class LoginActivity extends BaseActivity {
 
                             LoginCameraActivity.startActivity(LoginActivity.this);
                         }
-                    }
-                    else {
+                    } else {
                         Toast.makeText(LoginActivity.this, getString(R.string.verifique_status_servidor), Toast.LENGTH_LONG).show();
                     }
 
@@ -397,8 +393,7 @@ public class LoginActivity extends BaseActivity {
             if (urlAnyvision != null) {
                 GetVariables.getInstance().setEtAnyvisionUrl(urlAnyvision);
                 anyvisionUrl.setText(urlAnyvision);
-            }
-            else {
+            } else {
                 GetVariables.getInstance().setEtAnyvisionUrl(anyvisionUrl.getText().toString());
             }
         } catch (Exception e) {
